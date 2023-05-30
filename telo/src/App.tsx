@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import LoadingPage from './components/loading/LoadingPage'
 import Login from './components/auth/Login'
+import SignUp from './components/auth/SignUp'
+import HomePage from './components/main/home/HomePage'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 function App() {
 
@@ -13,9 +16,13 @@ function App() {
   })
 
   return (
-    <>
-      {loading ? <LoadingPage /> : <Login />}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/'element={loading ? <LoadingPage /> : <Login />}/>
+        <Route path='/signUp'element={<SignUp/>}/>
+        <Route path='/home'element={<HomePage/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
