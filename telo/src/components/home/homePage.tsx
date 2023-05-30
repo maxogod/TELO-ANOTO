@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const homePage = props => {
+const HomePage = () => {
     return (
         <div>
             
@@ -9,8 +9,6 @@ const homePage = props => {
     );
 };
 
-homePage.propTypes = {
-    
-};
 
-export default homePage;
+
+export default HomePage;
