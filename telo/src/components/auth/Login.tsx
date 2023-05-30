@@ -6,8 +6,8 @@ import arrowEnter from '../../assets/icons/arrowEnter.svg'
 import atSymbol from '../../assets/icons/atSymbol.svg'
 import lock from '../../assets/icons/lock.svg'
 import googleIcon from '../../assets/icons/google.svg'
-import Register from './SignUp'
-import BackgroundLogin from '../utils/BackgroundLogin';
+
+import BackgroundAuth from '../utils/BackgroundAuth'
 
 const Login = () => {
 
@@ -23,22 +23,28 @@ const Login = () => {
 
   const handleGoogleAuth = () => {}
 
+  const labels = [
+    { title: 'email', icon: atSymbol },
+    { title: 'contraseña', icon: lock },
+  ]
+
   return (
     <>
-      <BackgroundLogin/>
+      <BackgroundAuth/>
+
       <div className="fixed inset-0  flex items-center justify-center flex-col">
         <img src={logo} className="absolute top-10 contrast-200" alt="logo" />
         
         <form onSubmit={handleSubmit} className='flex flex-col items-center mt-40'>
           <p className='text-white w-full text-left'>Ingrese su email y contraseña</p>
-          <label htmlFor="email" className='mb-2 flex items-center'>
-            <img src={atSymbol} alt="at symbol" className='bg-white h-full p-1 rounded-l-lg' />
-            <input type="email" id="email" onChange={handleChange} className='w-72 h-8 rounded-r-lg opacity-40 font-extrabold pl-2' />
-          </label>
-          <label htmlFor="password" className='mb-6 flex items-center'>
-            <img src={lock} alt="lock" className='bg-white p-1 rounded-l-lg' />
-            <input type="password" id="password" onChange={handleChange} className='w-72 h-8 rounded-r-lg opacity-40 font-extrabold pl-2' />
-          </label>
+
+          {labels.map((label, index) => (
+            <label key={index} htmlFor={label.title} className='mb-2 flex items-center'>
+              <img src={label.icon} alt="at symbol" className='bg-white opacity-60 h-full p-1 rounded-l-lg' />
+              <input type={label.title} id={label.title} onChange={handleChange} required className='w-72 h-8 rounded-r-lg opacity-40 font-extrabold pl-2' />
+            </label>
+          ))}
+
           <button type="submit" className=' rounded-xl w-36 bg-white flex items-center justify-center'>
             <img src={arrowEnter} alt="Enter" />
           </button>
@@ -50,8 +56,7 @@ const Login = () => {
 
         <div className='text-gray-400 w-80'>
           <a href="#"><p>olvidaste tu contraseña?</p></a>
-          <a href="#"><p>no esta registrado? 
-            <b onClick={Register} className='text-white'>Crear Cuenta</b></p></a>
+          <Link to='/signUp'><p>no esta registrado? <b className='text-white'>Crear Cuenta</b></p></Link>
         </div>
 
         <footer className='absolute bottom-1 text-gray-400 w-full ml-7'>Ide.all - 2023</footer>
