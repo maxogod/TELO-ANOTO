@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-import cityPic from '../../assets/cityPic.png'
 import logo from '../../assets/logo.svg'
 import arrowEnter from '../../assets/arrowEnter.svg'
 import atSymbol from '../../assets/icons/atSymbol.svg'
 import lock from '../../assets/icons/lock.svg'
 import googleIcon from '../../assets/icons/google.svg'
+import Register from './SignUp'
+import BackgroundLogin from '../tools/BackgroundLogin';
 
 const Login = () => {
 
@@ -23,8 +25,8 @@ const Login = () => {
 
   return (
     <>
-      <img src={cityPic} alt="cityPic" className='w-screen h-screen object-cover object-center fixed transform scale-150 top-40' />
-      <div className="fixed inset-0 bg-gradient-to-bl from-violet-950 opacity-80 brightness-75 to-black flex items-center justify-center flex-col">
+      <BackgroundLogin/>
+      <div className="fixed inset-0  flex items-center justify-center flex-col">
         <img src={logo} className="absolute top-10 contrast-200" alt="logo" />
         
         <form onSubmit={handleSubmit} className='flex flex-col items-center mt-40'>
@@ -48,7 +50,8 @@ const Login = () => {
 
         <div className='text-gray-400 w-80'>
           <a href="#"><p>olvidaste tu contraseña?</p></a>
-          <a href="#"><p>no esta registrado? <b className='text-white'>Crear Cuenta</b></p></a>
+          <a href="#"><p>no esta registrado? 
+            <b onClick={Register} className='text-white'>Crear Cuenta</b></p></a>
         </div>
 
         <footer className='absolute bottom-1 text-gray-400 w-full ml-7'>Ide.all - 2023</footer>
