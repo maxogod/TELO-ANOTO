@@ -4,6 +4,7 @@ import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import HomePage from './components/main/home/HomePage'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import GMap from './components/main/mapPage/GMap'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/'element={loading ? <LoadingPage /> : <Login />}/>
         <Route path='/signUp'element={<SignUp/>}/>
         <Route path='/home'element={<HomePage/>}/>
+        <Route path='/map'element={<GMap/>}/>
       </Routes>
     </BrowserRouter>
   )
