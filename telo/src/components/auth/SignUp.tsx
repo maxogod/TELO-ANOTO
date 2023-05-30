@@ -1,15 +1,12 @@
 
 
-import cityPic from '../../assets/cityPic.png'
-import logo from '../../assets/logo.svg'
-import arrowEnter from '../../assets/arrowEnter.svg'
 import atSymbol from '../../assets/icons/atSymbol.svg'
 import lock from '../../assets/icons/lock.svg'
 import calendar from '../../assets/icons/calendar.svg'
 import phone from '../../assets/icons/phone.svg'
 import googleIcon from '../../assets/icons/google.svg'
 import { useState } from 'react'
-import BackgroundLogin from '../tools/BackgroundLogin'
+import BackgroundLogin from '../utils/BackgroundLogin'
 
 
 const Register = () => {

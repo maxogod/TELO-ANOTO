@@ -1,5 +1,4 @@
-import React from 'react';
-import cityPic from '../../assets/cityPic.png'
+import cityPic from '../../assets/background/cityPic.png'
 
 
 const BackgroundLogin = () => {

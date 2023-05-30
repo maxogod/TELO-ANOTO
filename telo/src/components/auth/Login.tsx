@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo.svg'
-import arrowEnter from '../../assets/arrowEnter.svg'
+import arrowEnter from '../../assets/icons/arrowEnter.svg'
 import atSymbol from '../../assets/icons/atSymbol.svg'
 import lock from '../../assets/icons/lock.svg'
 import googleIcon from '../../assets/icons/google.svg'
 import Register from './SignUp'
-import BackgroundLogin from '../tools/BackgroundLogin';
+import BackgroundLogin from '../utils/BackgroundLogin';
 
 const Login = () => {
 
