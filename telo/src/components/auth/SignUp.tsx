@@ -9,14 +9,14 @@ import googleIcon from '../../assets/icons/google.svg'
 import arrowEnter from '../../assets/icons/arrowEnter.svg'
 
 import BackgroundAuth from '../utils/BackgroundAuth'
+import { registerUser } from '../../utils/localStorage'
 
-
-const Register = () => {
+const SignUp = () => {
 
   const [userInfo, setUserInfo] = useState({
     email: '',
     phone: '',
-    birthDate: '',
+    dateBirth: '',
     password: '',
   })
 
@@ -26,15 +26,21 @@ const Register = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    registerUser({
+      email: userInfo.email,
+      phone: parseInt(userInfo.phone),
+      dateBirth: new Date(userInfo.dateBirth),
+      password: userInfo.password,
+    })
   }
 
   const handleGoogleAuth = () => {}
 
   const labels = [
-    { title: 'email', icon: atSymbol, type: 'email'},
-    { title: 'contraseña', icon: lock, type: 'password'},
-    { title: 'celular', icon: phone, type: 'number', placeholder: '+54 11 1234-5678'},
-    { title: 'fecha de nacimiento', icon: calendar, type: 'date'},
+    { title: 'email', icon: atSymbol, type: 'email', userProp: 'email'},
+    { title: 'contraseña', icon: lock, type: 'password', userProp: 'password'},
+    { title: 'celular', icon: phone, type: 'number', placeholder: '+54 11 1234-5678', userProp: 'phone'},
+    { title: 'fecha de nacimiento', icon: calendar, type: 'date', userProp: 'dateBirth'},
   ]
 
   return (
@@ -50,9 +56,9 @@ const Register = () => {
           {labels.map((label, index) => (
             <div key={index}>
               <p className='text-white opacity-30 w-full text-left'>{label.title}</p>
-              <label htmlFor={label.title} className='mb-2 flex items-center'>
+              <label htmlFor={label.userProp} className='mb-2 flex items-center'>
                 <img src={label.icon} alt="at symbol" className='bg-white opacity-60 h-full p-1 rounded-l-lg' />
-                <input type={label.type} id={label.title} placeholder={label?.placeholder} onChange={handleChange} required className='w-72 h-8 rounded-r-lg opacity-40 font-extrabold pl-2' />
+                <input type={label.type} id={label.userProp} placeholder={label?.placeholder} onChange={handleChange} required className='w-72 h-8 rounded-r-lg opacity-40 font-extrabold pl-2' />
               </label>
             </div>
           ))}
@@ -76,4 +82,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default SignUp

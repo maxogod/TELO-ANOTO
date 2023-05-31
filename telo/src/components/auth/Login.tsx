@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import React from 'react'
 
 import logo from '../../assets/logo.svg'
 import arrowEnter from '../../assets/icons/arrowEnter.svg'
@@ -8,8 +9,16 @@ import lock from '../../assets/icons/lock.svg'
 import googleIcon from '../../assets/icons/google.svg'
 
 import BackgroundAuth from '../utils/BackgroundAuth'
+import { logInUser } from '../../utils/localStorage'
 
-const Login = () => {
+type setUserFunction = React.Dispatch<React.SetStateAction<{
+  email: string
+  phone: number
+  dateBirth: Date
+  password: string
+}>>
+
+const Login = ({ setUser }: {setUser: setUserFunction}) => {
 
   const [userInfo, setUserInfo] = useState({ email: '', password: ''})
 
@@ -19,13 +28,15 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const user = logInUser(userInfo.email, userInfo.password)
+    if (user) setUser(user)
   }
 
   const handleGoogleAuth = () => {}
 
   const labels = [
-    { title: 'email', icon: atSymbol },
-    { title: 'contraseña', icon: lock },
+    { title: 'email', icon: atSymbol, type: 'email' },
+    { title: 'contraseña', icon: lock, type: 'password' },
   ]
 
   return (
@@ -39,9 +50,9 @@ const Login = () => {
           <p className='text-white w-full text-left'>Ingrese su email y contraseña</p>
 
           {labels.map((label, index) => (
-            <label key={index} htmlFor={label.title} className='mb-2 flex items-center'>
+            <label key={index} htmlFor={label.type} className='mb-2 flex items-center'>
               <img src={label.icon} alt="at symbol" className='bg-white opacity-60 h-full p-1 rounded-l-lg' />
-              <input type={label.title} id={label.title} onChange={handleChange} required className='w-72 h-8 rounded-r-lg opacity-40 font-extrabold pl-2' />
+              <input type={label.type} id={label.type} onChange={handleChange} required className='w-72 h-8 rounded-r-lg opacity-40 font-extrabold pl-2' />
             </label>
           ))}
 

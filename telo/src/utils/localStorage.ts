@@ -1,3 +1,4 @@
+import { hashPassword, comparePassword } from "./hasher"
 
 interface User {
     email: string
@@ -10,7 +11,7 @@ function logInUser(email: string, password: string) {
     const existingUser = localStorage.getItem(email)
     if (existingUser) {
         const user = JSON.parse(existingUser) as User
-        if (user.password === password) {
+        if (comparePassword(password, user.password)) {
             localStorage.setItem('sessionUser', JSON.stringify(user))
             return user
         }
@@ -21,10 +22,19 @@ function logInUser(email: string, password: string) {
 function registerUser(user: User) {
     const existingUser = localStorage.getItem(user.email)
     if (!existingUser) {
+        user.password = hashPassword(user.password)
         localStorage.setItem(user.email, JSON.stringify(user))
         logInUser(user.email, user.password)
     }
     return null
 }
 
-export { logInUser, registerUser }
+function getSessionUser() {
+    const existingUser = localStorage.getItem('sessionUser')
+    if (existingUser) {
+        return JSON.parse(existingUser) as User
+    }
+    return null
+}
+
+export { logInUser, registerUser, getSessionUser }
