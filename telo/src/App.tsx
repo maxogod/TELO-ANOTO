@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom'
 
 import LoadingPage from './components/loading/LoadingPage'
 import Login from './components/auth/Login'
@@ -29,9 +29,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/'element={
-          loading ? <LoadingPage /> : ( user.email ? <HomePage /> : <Login setUser={setUser} />)
+          loading ? <LoadingPage /> : ( user.email ? <HomePage /> : <Navigate to='/login' />)
           }/>
-        <Route path='/signUp'element={<SignUp/>}/>
+        <Route path='/login'element={user.email ? <Navigate to='/' /> : <Login setUser={setUser}/>}/>
+        <Route path='/signup'element={user.email ? <Navigate to='/' /> :<SignUp/>}/>
       </Routes>
     </BrowserRouter>
   )

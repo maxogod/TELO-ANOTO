@@ -73,7 +73,7 @@ const SignUp = () => {
         </button>
 
         <div className='text-gray-400 w-80'>
-          <Link to='/'><p>ya esta registrado? <b className='text-white'>Inciar Sesion</b></p></Link>
+          <Link to='/login'><p>ya esta registrado? <b className='text-white'>Inciar Sesion</b></p></Link>
         </div>
 
         <footer className='absolute bottom-1 text-gray-400 w-full ml-7'>Ide.all - 2023</footer>
