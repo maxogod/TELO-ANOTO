@@ -13,10 +13,12 @@
     "bcryptjs": "^2.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-map-gl": "^7.0.25",
     "react-router-dom": "^6.11.2",
     "react-router-hash-link": "^2.4.3"
   },
   "devDependencies": {
+    "@types/node": "^20.2.5",
     "@types/bcryptjs": "^2.4.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",

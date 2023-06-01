@@ -1,12 +1,6 @@
-import cityPic from '../../assets/background/cityPic.png'
-import bgColor from '../../assets/background/backgroundColor.svg'
-
 const BackgroundMain = () => {
     return (
-        <div className="relative">
-        <img src={cityPic} alt="City" className="absolute inset-0 w-full h-full object-cover" />
-        <img src={bgColor} alt="Gradient Overlay" className="absolute inset-0 w-full h-full object-cover opacity-80" />
-      </div>
+      <div className="fixed inset-0 bg-gradient-to-bl from-violet-950 opacity-90 brightness-75 to-black"></div>
     );
 };
 
