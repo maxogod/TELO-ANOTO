@@ -24,7 +24,7 @@ function registerUser(user: User) {
     if (!existingUser) {
         user.password = hashPassword(user.password)
         localStorage.setItem(user.email, JSON.stringify(user))
-        logInUser(user.email, user.password)
+        return user
     }
     return null
 }

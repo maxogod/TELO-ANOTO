@@ -16,7 +16,7 @@ type setUserFunction = React.Dispatch<React.SetStateAction<{
   phone: number
   dateBirth: Date
   password: string
-}>>
+} | null>>
 
 const Login = ({ setUser }: {setUser: setUserFunction}) => {
 

@@ -9,9 +9,17 @@ import googleIcon from '../../assets/icons/google.svg'
 import arrowEnter from '../../assets/icons/arrowEnter.svg'
 
 import BackgroundAuth from '../utils/BackgroundAuth'
-import { registerUser } from '../../utils/localStorage'
+import { registerUser, logInUser } from '../../utils/localStorage'
 
-const SignUp = () => {
+type setUserFunction = React.Dispatch<React.SetStateAction<{
+  email: string
+  phone: number
+  dateBirth: Date
+  password: string
+} | null>>
+
+
+const SignUp = ({ setUser }: {setUser: setUserFunction}) => {
 
   const [userInfo, setUserInfo] = useState({
     email: '',
@@ -32,6 +40,8 @@ const SignUp = () => {
       dateBirth: new Date(userInfo.dateBirth),
       password: userInfo.password,
     })
+    const user = logInUser(userInfo.email, userInfo.password)
+    if (user) setUser(user)
   }
 
   const handleGoogleAuth = () => {}
@@ -73,7 +83,7 @@ const SignUp = () => {
         </button>
 
         <div className='text-gray-400 w-80'>
-          <Link to='/login'><p>ya esta registrado? <b className='text-white'>Inciar Sesion</b></p></Link>
+          <Link to='/login  '><p>ya esta registrado? <b className='text-white'>Inciar Sesion</b></p></Link>
         </div>
 
         <footer className='absolute bottom-1 text-gray-400 w-full ml-7'>Ide.all - 2023</footer>
