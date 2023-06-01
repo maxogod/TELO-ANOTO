@@ -67,7 +67,7 @@ const Login = ({ setUser }: {setUser: setUserFunction}) => {
 
         <div className='text-gray-400 w-80'>
           <a href="#"><p>olvidaste tu contraseña?</p></a>
-          <Link to='/signUp'><p>no esta registrado? <b className='text-white'>Crear Cuenta</b></p></Link>
+          <Link to='/signup'><p>no esta registrado? <b className='text-white'>Crear Cuenta</b></p></Link>
         </div>
 
         <footer className='absolute bottom-1 text-gray-400 w-full ml-7'>Ide.all - 2023</footer>

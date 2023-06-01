@@ -14,11 +14,10 @@ const NavBar = () => {
 
 
     return (
-        <nav className="bg-purple-400 fixed bottom-0 left-0 w-full flex justify-around py-3 rounded-t-lg rounded-b-lg">
+        <nav className=" bg-navBarPurple opacity-80 fixed bottom-0 left-0 w-full flex justify-around py-1 rounded-tl-2xl rounded-tr-2xl">
             {sections.map((section) => (
         <a key={section.id} href={`#${section.id}`} className="flex flex-col items-center text-gray-300">
-          <img src={section.icon} alt={`${section.label} Icon`} className="h-6 w-6" />
-          <span className="text-xs mt-1">{section.label}</span>
+          <img src={section.icon} alt={`${section.label} Icon`} className="h-full w-full backdrop-opacity-100 " />
         </a>
       ))}
     </nav>
