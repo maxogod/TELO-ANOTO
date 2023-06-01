@@ -7,6 +7,8 @@ import SignUp from './components/auth/SignUp'
 import HomePage from './components/main/home/HomePage'
 import GMap from './components/main/mapPage/GMap'
 import { getSessionUser } from './utils/localStorage'
+import MapPage from './components/main/mapPage/MapPage'
+import ProfilePage from './components/main/profile/ProfilePage'
 
 function App() {
 
@@ -27,7 +29,8 @@ function App() {
           }/>
         <Route path='/login'element={user ? <Navigate to='/' /> : <Login setUser={setUser}/>}/>
         <Route path='/signup'element={user ? <Navigate to='/' /> : <SignUp setUser={setUser}/>}/>
-        <Route path='/map'element={<GMap/>}/>
+        <Route path='/map'element={<MapPage/>}/>
+        <Route path='/profile'element={<ProfilePage/>}/>
       </Routes>
     </BrowserRouter>
   )

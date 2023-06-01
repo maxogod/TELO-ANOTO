@@ -12,7 +12,7 @@ const HomePage = () => {
             <BackgroundMain/>
             <Filter/>
             <h1>homepage</h1>
-            <NavBar/>
+            <NavBar opacity={80}/>
         </div>
     );
 };
