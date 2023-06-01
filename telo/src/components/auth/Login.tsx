@@ -21,6 +21,7 @@ type setUserFunction = React.Dispatch<React.SetStateAction<{
 const Login = ({ setUser }: {setUser: setUserFunction}) => {
 
   const [userInfo, setUserInfo] = useState({ email: '', password: ''})
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value })
@@ -30,6 +31,7 @@ const Login = ({ setUser }: {setUser: setUserFunction}) => {
     e.preventDefault()
     const user = logInUser(userInfo.email, userInfo.password)
     if (user) setUser(user)
+    else setError('email o contraseña incorrectos')
   }
 
   const handleGoogleAuth = () => {}
@@ -56,6 +58,8 @@ const Login = ({ setUser }: {setUser: setUserFunction}) => {
             </label>
           ))}
 
+          {error && <p className='text-red-500 text-center'>{error}</p>}
+
           <button type="submit" className=' rounded-xl w-36 bg-white flex items-center justify-center'>
             <img src={arrowEnter} alt="Enter" />
           </button>
@@ -67,7 +71,7 @@ const Login = ({ setUser }: {setUser: setUserFunction}) => {
 
         <div className='text-gray-400 w-80'>
           <a href="#"><p>olvidaste tu contraseña?</p></a>
-          <Link to='/signUp'><p>no esta registrado? <b className='text-white'>Crear Cuenta</b></p></Link>
+          <Link to='/signup'><p>no esta registrado? <b className='text-white'>Crear Cuenta</b></p></Link>
         </div>
 
         <footer className='absolute bottom-1 text-gray-400 w-full ml-7'>Ide.all - 2023</footer>

@@ -1,5 +1,5 @@
 import BackgroundMain from "../../utils/BackgroundMain";
-import Filter from "../../utils/Filter";
+import FilterBar from "../../utils/FilterBar";
 import NavBar from "../../utils/NavBar";
 
 const HomePage = () => {
@@ -8,7 +8,7 @@ const HomePage = () => {
     return (
         <div>
             <BackgroundMain/>
-            <Filter/>
+            <FilterBar numOfStars={2} distanceInKm={5} priceInPesos={10000}/>
             <h1>homepage</h1>
             <NavBar/>
         </div>
