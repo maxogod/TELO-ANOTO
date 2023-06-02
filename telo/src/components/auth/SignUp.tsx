@@ -21,6 +21,7 @@ type setUserFunction = React.Dispatch<React.SetStateAction<{
 
 const SignUp = ({ setUser }: {setUser: setUserFunction}) => {
 
+  const [error, setError] = useState('')
   const [userInfo, setUserInfo] = useState({
     email: '',
     phone: '',
@@ -28,12 +29,24 @@ const SignUp = ({ setUser }: {setUser: setUserFunction}) => {
     password: '',
   })
 
+  const validateInfo = () => {
+    if (!/^(\+?54)?(9)?([0-9]{2})?([0-9]{3})([0-9]{4})$/.test(userInfo.phone)) return false
+    const today = new Date()
+    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate())
+    if ((new Date(userInfo.dateBirth)) > eighteenYearsAgo) return false
+    return true
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value })
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!validateInfo()) {
+      setError('error al validar los datos')
+      return
+    }
     registerUser({
       email: userInfo.email,
       phone: parseInt(userInfo.phone),
@@ -72,6 +85,8 @@ const SignUp = ({ setUser }: {setUser: setUserFunction}) => {
               </label>
             </div>
           ))}
+
+          {error && <p className='text-red-500 text-center'>{error}</p>}
 
           <button type="submit" className='mt-3 rounded-xl w-36 bg-white flex items-center justify-center'>
             <img src={arrowEnter} alt="Enter" />
