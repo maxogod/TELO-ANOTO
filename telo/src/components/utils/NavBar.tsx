@@ -2,25 +2,32 @@
 import home from '../../assets/icons/home.svg'
 import profile from '../../assets/icons/profile.svg'
 import map from '../../assets/icons/map.svg'
+import { Link } from 'react-router-dom';
 
 
-const NavBar = () => {
+const NavBar = ({ opacity }: {opacity: number}) => {
 
     const sections = [
-        { id: 'map', label: 'Map', icon: map  },
-        { id: 'home', label: 'Home', icon: home },
-        { id: 'profile', label: 'Profile', icon: profile  },
+        { id: 'map', url: '/map', icon: map  },
+        { id: 'home', url: '/', icon: home },
+        { id: 'profile', url: '/profile', icon: profile  },
       ];
 
 
     return (
-        <nav className="bg-purple-400 fixed bottom-0 left-0 w-full flex justify-around py-3 rounded-t-lg rounded-b-lg">
-            {sections.map((section) => (
-        <a key={section.id} href={`#${section.id}`} className="flex flex-col items-center text-gray-300">
-          <img src={section.icon} alt={`${section.label} Icon`} className="h-6 w-6" />
-          <span className="text-xs mt-1">{section.label}</span>
-        </a>
-      ))}
+        <nav className={`bg-navBarPurple opacity-${opacity} fixed bottom-0 left-0 w-full flex justify-around py-1 rounded-tl-2xl rounded-tr-2xl`}>
+            {sections.map((section) => {
+            const isActive = location.pathname === section.url;
+          return (
+          <Link to={section.url} key={section.id} className="flex flex-col items-center text-gray-300">
+            <img
+              src={section.icon}
+              alt={`${section.id} Icon`}
+              className={`h-full w-full  ${isActive ? 'invert' : 'none'}`}
+            />
+          </Link>
+        );
+      })}
     </nav>
 
        
