@@ -1,5 +1,5 @@
 import BackgroundMain from "../../utils/BackgroundMain";
-import Filter from "../../utils/Filter";
+import FilterBar from "../../utils/FilterBar";
 import NavBar from "../../utils/NavBar";
 import GMap from "../mapPage/GMap";
 
@@ -7,11 +7,11 @@ import GMap from "../mapPage/GMap";
 const ProfilePage = () => {
     return (
         <div>
-            <GMap/>
-            <BackgroundMain/>
-            <Filter/>
+            <GMap />
+            <BackgroundMain />
+            <FilterBar />
             <h1>profile</h1>
-            <NavBar opacity={80}/>
+            <NavBar opacity={80} />
         </div>
     );
 };

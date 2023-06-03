@@ -13,7 +13,7 @@ const FilterBar = ({ numOfStars, distanceInKm, priceInPesos }: FilterBarProps) =
     const distance = `${distanceInKm}km`
     const price = `$${priceInPesos}`
 
-    const handlePopUp = () => {}
+    const handlePopUp = () => { }
 
     return (
         <div className='pl-3 pt-3 flex'>
@@ -21,7 +21,7 @@ const FilterBar = ({ numOfStars, distanceInKm, priceInPesos }: FilterBarProps) =
             <div className='flex flex-col ml-1'>
                 <div id='stars' className='flex pl-2'>
                     {stars.map((star, index) => (
-                        <img key={index} className={star.fill} src={starIcon} alt="star" />
+                        <img key={index} className={`${star.fill} opacity-60`} src={starIcon} alt="star" />
                     ))}
                 </div>
                 <p className='h-4 pt-1 scale-75 text-white opacity-50'>{distance}</p>

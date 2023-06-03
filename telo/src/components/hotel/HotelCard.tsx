@@ -2,8 +2,10 @@ import heart from '../../assets/icons/heart.svg'
 import carIcon from '../../assets/icons/carIcon.svg'
 import starIcon from '../../assets/icons/star.svg'
 import locationPin from '../../assets/icons/locationPin.svg'
+import { Link } from "react-router-dom"
 
 interface Hotel {
+    id: number,
     name: string,
     location: string,
     picture: string,
@@ -29,8 +31,6 @@ const HotelCard = ({ hotel }: { hotel: Hotel }) => {
 
     const handleFavorite = () => { }
 
-    const handleBook = () => { }
-
     return (
         <div className="flex flex-col gap-2 justify-center items-center" style={{ height: '60vh' }}>
             <p className="text-white opacity-60">{titleCarousel[Math.floor(Math.random() * titleCarousel.length)]}</p>
@@ -53,7 +53,7 @@ const HotelCard = ({ hotel }: { hotel: Hotel }) => {
                             <div key={index} className='ml-3 relative mb-4'>
                                 <h1 className="text-xl font-bold">{room.name}</h1>
                                 <p className="text-xl opacity-70 font-bold">${room.price}</p>
-                                <button onClick={handleBook} className='bg-violet-900 rounded-lg text-white p-1 absolute right-3 top-4'>reserva ya</button>
+                                <Link to={`/book/${hotel.id}/${room.id}`} className='bg-violet-900 rounded-lg text-white p-1 absolute right-3 top-4'>reserva ya</Link>
                             </div>
                         ))}
                     </div>
