@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom'
+import {BrowserRouter, Route, Routes, Navigate , useLocation } from 'react-router-dom'
+import SlideRoutes from 'react-slide-routes';
 
 import LoadingPage from './components/loading/LoadingPage'
 import Login from './components/auth/Login'
@@ -24,14 +25,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/'element={
-          loading ? <LoadingPage /> : ( user ? <HomePage /> : <Navigate to='/login' />)
-          }/>
         <Route path='/login'element={user ? <Navigate to='/' /> : <Login setUser={setUser}/>}/>
         <Route path='/signup'element={user ? <Navigate to='/' /> : <SignUp setUser={setUser}/>}/>
-        <Route path='/map'element={<MapPage/>}/>
-        <Route path='/profile'element={<ProfilePage/>}/>
       </Routes>
+      <SlideRoutes >
+          <Route path='/map'element={<MapPage/>}/>
+          <Route path='/'element={
+            loading ? <LoadingPage /> : ( user ? <HomePage /> : <Navigate to='/login' />)
+            }/>
+          <Route path='/profile'element={<ProfilePage/>}/>
+        </SlideRoutes>
     </BrowserRouter>
   )
 }

@@ -19,7 +19,7 @@ const NavBar = ({ opacity }: {opacity: number}) => {
             {sections.map((section) => {
             const isActive = location.pathname === section.url;
           return (
-          <Link to={section.url} key={section.id} className="flex flex-col items-center text-gray-300">
+          <Link to={section.url} key={section.id} className=" transition-transform flex flex-col items-center text-gray-300">
             <img
               src={section.icon}
               alt={`${section.id} Icon`}
