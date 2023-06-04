@@ -16,7 +16,7 @@ const FilterBar = ({ numOfStars, distanceInKm, priceInPesos }: FilterBarProps) =
     const handlePopUp = () => { }
 
     return (
-        <div className='pl-3 pt-3 flex'>
+        <div className='pl-3 pt-3 flex '>
             <button onClick={handlePopUp}><img className='opacity-90 scale-110' src={filterIcon} alt="filter" /></button>
             <div className='flex flex-col ml-1'>
                 <div id='stars' className='flex pl-2'>

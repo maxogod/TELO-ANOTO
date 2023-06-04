@@ -30,3 +30,7 @@ input[type="date"]::-webkit-datetime-edit {
     border-top-left-radius: 2.5rem /* 24px */;
     border-top-right-radius: 2.5rem /* 24px */;
 }
+
+.slide {
+    height: 100vh !important;
+}
