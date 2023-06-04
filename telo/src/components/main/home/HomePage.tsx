@@ -3,7 +3,7 @@ import FilterBar from "../../utils/FilterBar"
 import NavBar from "../../utils/NavBar"
 import GMap from "../mapPage/GMap"
 import { HotelCard } from "../../hotel/HotelCard"
-import { hotel } from "../../../utils/mockData"
+import { hotels } from "../../../utils/mockData"
 
 const HomePage = () => {
 
@@ -13,10 +13,10 @@ const HomePage = () => {
             <BackgroundMain />
             <NavBar opacity={80} />
             <FilterBar numOfStars={2} distanceInKm={5} priceInPesos={10000} />
-            <HotelCard hotel={hotel} />
+            <HotelCard hotel={hotels[0]} />
         </div>
-    );
-};
+    )
+}
 
 
 
