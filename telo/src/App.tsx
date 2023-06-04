@@ -6,10 +6,10 @@ import LoadingPage from './components/loading/LoadingPage'
 import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import HomePage from './components/main/home/HomePage'
-import GMap from './components/main/mapPage/GMap'
 import { getSessionUser } from './utils/localStorage'
 import MapPage from './components/main/mapPage/MapPage'
 import ProfilePage from './components/main/profile/ProfilePage'
+import Book from './components/payments/Book'
 
 function App() {
 
@@ -27,6 +27,7 @@ function App() {
       <Routes>
         <Route path='/login'element={user ? <Navigate to='/' /> : <Login setUser={setUser}/>}/>
         <Route path='/signup'element={user ? <Navigate to='/' /> : <SignUp setUser={setUser}/>}/>
+        <Route path='/book/:hotel_id/:room_id' element={<Book />} />
       </Routes>
       <SlideRoutes >
           <Route path='/map'element={<MapPage/>}/>

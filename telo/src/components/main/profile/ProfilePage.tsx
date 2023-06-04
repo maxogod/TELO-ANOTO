@@ -10,7 +10,6 @@ import Reservations from "./Reservations";
 const ProfilePage = () => {
     return (
         <div>
-        
             <BackgroundMain/>
             <NavBar opacity={80}/>
             <FilterBar numOfStars={2} distanceInKm={5} priceInPesos={10000} />
@@ -20,7 +19,6 @@ const ProfilePage = () => {
                 <Favorites/>
                 <Reservations/>
             </div>
-
         </div>
     );
 };
