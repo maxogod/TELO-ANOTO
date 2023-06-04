@@ -5,6 +5,8 @@ export default {
     extend: {
       colors: {
         navBarPurple: '#7D6F95',
+        teloBlack: '#222222',
+        teloWhite: '#D9D9D9',
       },
       gradientColorStops: {
         purpleGradient: ['#08050D', '#1B0939', '#290B5B', '#46119E'],
