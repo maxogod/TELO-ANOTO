@@ -14,7 +14,7 @@ const ProfilePage = () => {
             <NavBar opacity={80}/>
             <FilterBar numOfStars={2} distanceInKm={5} priceInPesos={10000} />
 
-            <div className=' flex flex-col items-center justify-center gap-6 mt-16'>
+            <div className=' flex flex-col h-full items-center justify-center gap-6 mt-16'>
                 <ProfileCard/>
                 <Favorites/>
                 <Reservations/>
