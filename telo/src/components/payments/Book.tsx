@@ -4,6 +4,13 @@ import BackgroundMain from "../utils/BackgroundMain"
 import GMap from "../main/mapPage/GMap"
 import NavBar from "../utils/NavBar"
 import locationPin from '../../assets/icons/locationPin.svg'
+import AnimatedPage from "../animations/AnimatedPage"
+
+const animation = {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 0 },
+}
 
 const Book = () => {
 
@@ -17,9 +24,7 @@ const Book = () => {
     }
 
     return (
-        <div>
-            <GMap />
-            <BackgroundMain />
+        <AnimatedPage animation={animation}>
             <div className="flex items-center justify-center h-screen">
                 <div className="relative">
                     <div className="opacity-80 absolute h-28 bg-slate-500 rounded-t-4xl flex flex-wrap w-80 p-3 pl-6">
@@ -49,8 +54,7 @@ const Book = () => {
                     </div>
                 </div>
             </div>
-            <NavBar opacity={80} />
-        </div>
+        </AnimatedPage>
     )
 }
 

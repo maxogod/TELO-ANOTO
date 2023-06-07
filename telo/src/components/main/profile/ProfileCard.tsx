@@ -4,6 +4,7 @@ import edit from '../../../assets/icons/edit.svg'
 import slide from '../../../assets/icons/slide.svg'
 
 const ProfileCard = () => {
+
     return (
       <div className='relative w-80 h-40 rounded-xl'>
   <div className='bg-teloBlack opacity-70 w-full h-full rounded-xl'>
