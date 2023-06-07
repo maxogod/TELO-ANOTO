@@ -16,8 +16,7 @@ const ProfilePage = () => {
 
             <div className=' flex flex-col h-full items-center justify-center gap-6 mt-16'>
                 <ProfileCard/>
-                <Favorites/>
-                <Reservations/>
+          
             </div>
         </div>
     );
