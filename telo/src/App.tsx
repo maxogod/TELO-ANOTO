@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import {BrowserRouter, Route, Routes, Navigate , useLocation } from 'react-router-dom'
-import SlideRoutes from 'react-slide-routes';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import SlideRoutes from 'react-slide-routes'
 
 import LoadingPage from './components/loading/LoadingPage'
 import Login from './components/auth/Login'
@@ -10,6 +10,9 @@ import { getSessionUser } from './utils/localStorage'
 import MapPage from './components/main/mapPage/MapPage'
 import ProfilePage from './components/main/profile/ProfilePage'
 import Book from './components/payments/Book'
+import BackgroundMain from './components/utils/BackgroundMain'
+import NavBar from './components/utils/NavBar'
+import FilterBar from './components/utils/FilterBar'
 
 function App() {
 
@@ -24,18 +27,19 @@ function App() {
 
   return (
     <BrowserRouter>
+      <BackgroundMain />
+      <NavBar opacity={80} />
+      <FilterBar numOfStars={2} distanceInKm={5} priceInPesos={10000} />
       <Routes>
-        <Route path='/login'element={user ? <Navigate to='/' /> : <Login setUser={setUser}/>}/>
-        <Route path='/signup'element={user ? <Navigate to='/' /> : <SignUp setUser={setUser}/>}/>
+        <Route path='/' element={
+          loading ? <LoadingPage /> : (user ? <HomePage /> : <Navigate to='/login' />)
+        } />
+        <Route path='/login' element={user ? <Navigate to='/' /> : <Login setUser={setUser} />} />
+        <Route path='/signup' element={user ? <Navigate to='/' /> : <SignUp setUser={setUser} />} />
+        <Route path='/map' element={<MapPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
         <Route path='/book/:hotel_id/:room_id' element={<Book />} />
       </Routes>
-      <SlideRoutes >
-          <Route path='/map'element={<MapPage/>}/>
-          <Route path='/'element={
-            loading ? <LoadingPage /> : ( user ? <HomePage /> : <Navigate to='/login' />)
-            }/>
-          <Route path='/profile'element={<ProfilePage/>}/>
-        </SlideRoutes>
     </BrowserRouter>
   )
 }

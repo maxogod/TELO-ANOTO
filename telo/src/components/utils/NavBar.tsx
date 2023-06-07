@@ -5,20 +5,20 @@ import map from '../../assets/icons/map.svg'
 import { Link } from 'react-router-dom';
 
 
-const NavBar = ({ opacity }: {opacity: number}) => {
+const NavBar = ({ opacity }: { opacity: number }) => {
 
-    const sections = [
-        { id: 'map', url: '/map', icon: map  },
-        { id: 'home', url: '/', icon: home },
-        { id: 'profile', url: '/profile', icon: profile  },
-      ];
+  const sections = [
+    { id: 'map', url: '/map', icon: map },
+    { id: 'home', url: '/', icon: home },
+    { id: 'profile', url: '/profile', icon: profile },
+  ];
 
 
-    return (
-        <nav className={`bg-navBarPurple opacity-${opacity} fixed bottom-0 left-0 w-full flex justify-around py-1 rounded-tl-2xl rounded-tr-2xl`}>
-            {sections.map((section) => {
-            const isActive = location.pathname === section.url;
-          return (
+  return (
+    <nav className={`bg-navBarPurple opacity-${opacity} fixed bottom-0 w-screen flex justify-around py-1 rounded-tl-2xl rounded-tr-2xl`}>
+      {sections.map((section) => {
+        const isActive = location.pathname === section.url;
+        return (
           <Link to={section.url} key={section.id} className=" transition-transform flex flex-col items-center text-gray-300">
             <img
               src={section.icon}
@@ -29,9 +29,7 @@ const NavBar = ({ opacity }: {opacity: number}) => {
         );
       })}
     </nav>
-
-       
-      );
+  );
 };
 
 export default NavBar;
