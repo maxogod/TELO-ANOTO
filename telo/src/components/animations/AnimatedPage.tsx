@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 type OpacityAndDisplacement = {
     opacity: number;
@@ -11,7 +11,7 @@ type AnimationInterface = {
     exit: OpacityAndDisplacement
 }
 
-const AnimatedPage = ({ children, animation: animation }:
+const AnimatedPage = ({ children, animation }:
     { children: JSX.Element; animation: AnimationInterface }) => {
     return (
         <motion.div

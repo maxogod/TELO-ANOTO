@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
+
 import { hotels } from "../../utils/mockData"
-import BackgroundMain from "../utils/BackgroundMain"
-import GMap from "../main/mapPage/GMap"
-import NavBar from "../utils/NavBar"
+
 import locationPin from '../../assets/icons/locationPin.svg'
 import AnimatedPage from "../animations/AnimatedPage"
 
@@ -28,6 +28,7 @@ const Book = () => {
             <div className="flex items-center justify-center h-screen">
                 <div className="relative">
                     <div className="opacity-80 absolute h-28 bg-slate-500 rounded-t-4xl flex flex-wrap w-80 p-3 pl-6">
+                        <Link to='/' className="absolute right-6 font-bold text-white z-10">X</Link>
                         <h1 className="brightness-200 text-white text-2xl font-bold w-full -mb-7">{hotel?.name}</h1>
                         <img className='brightness-200 h-5 text-white' src={locationPin} alt="" />
                         <p className="brightness-200 text-white">{hotel?.location}</p>

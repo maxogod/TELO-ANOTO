@@ -1,17 +1,15 @@
-
-import { useState } from 'react';
+import { useState } from 'react'
 
 const Favorites = () => {
+  const [expanded, setExpanded] = useState(false);
 
-    const [expanded, setExpanded] = useState(false);
-    
-      const handleExpand = () => {
-        setExpanded(!expanded);
-      };
+  const handleExpand = () => {
+    setExpanded(!expanded);
+  };
 
 
-    return (
-         <div className={`relative ${expanded ? 'h-screen' : 'w-80 h-40'} rounded-xl overflow-hidden`}>
+  return (
+    <div className={`relative ${expanded ? 'h-screen' : 'w-80 h-40'} rounded-xl overflow-hidden`}>
       <div className='bg-teloBlack opacity-70 w-full h-full rounded-xl'>
         {/* Add your content here */}
       </div>
@@ -25,7 +23,7 @@ const Favorites = () => {
         </button>
       )}
     </div>
-    );
+  );
 };
 
 export default Favorites;

@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
 
 import home from '../../assets/icons/home.svg'
 import profile from '../../assets/icons/profile.svg'
 import map from '../../assets/icons/map.svg'
-import { Link } from 'react-router-dom';
 
 
 const NavBar = ({ opacity }: { opacity: number }) => {

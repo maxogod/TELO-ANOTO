@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import React from 'react'
 
+import BackgroundAuth from '../utils/BackgroundAuth'
+import { logInUser } from '../../utils/localStorage'
+
 import logo from '../../assets/logo.svg'
 import arrowEnter from '../../assets/icons/arrowEnter.svg'
 import atSymbol from '../../assets/icons/atSymbol.svg'
 import lock from '../../assets/icons/lock.svg'
 import googleIcon from '../../assets/icons/google.svg'
 
-import BackgroundAuth from '../utils/BackgroundAuth'
-import { logInUser } from '../../utils/localStorage'
 
 type setUserFunction = React.Dispatch<React.SetStateAction<{
   email: string

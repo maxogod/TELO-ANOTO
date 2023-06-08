@@ -1,10 +1,6 @@
-import BackgroundMain from "../../utils/BackgroundMain"
-import FilterBar from "../../utils/FilterBar"
-import NavBar from "../../utils/NavBar"
-import GMap from "../mapPage/GMap"
 import { HotelCard } from "../../hotel/HotelCard"
-import { hotels } from "../../../utils/mockData"
 import AnimatedPage from "../../animations/AnimatedPage"
+import { hotels } from "../../../utils/mockData"
 
 const animation = {
     initial: { opacity: 0, x: -100 },

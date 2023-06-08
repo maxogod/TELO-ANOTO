@@ -1,5 +1,4 @@
 
-
 const Reservations = () => {
     return (
         <div className="bottom-0">

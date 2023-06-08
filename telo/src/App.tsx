@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import SlideRoutes from 'react-slide-routes'
+
+import { getSessionUser } from './utils/localStorage'
 
 import LoadingPage from './components/loading/LoadingPage'
 import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import HomePage from './components/main/home/HomePage'
-import { getSessionUser } from './utils/localStorage'
 import MapPage from './components/main/mapPage/MapPage'
 import ProfilePage from './components/main/profile/ProfilePage'
 import Book from './components/payments/Book'
-import BackgroundMain from './components/utils/BackgroundMain'
 import NavBar from './components/utils/NavBar'
 import FilterBar from './components/utils/FilterBar'
+import BackgroundMain from './components/utils/BackgroundMain'
 
 function App() {
 

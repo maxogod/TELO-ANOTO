@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom"
+
 import heart from '../../assets/icons/heart.svg'
 import carIcon from '../../assets/icons/carIcon.svg'
 import starIcon from '../../assets/icons/star.svg'
 import locationPin from '../../assets/icons/locationPin.svg'
-import { Link } from "react-router-dom"
 
 interface Hotel {
     id: number,

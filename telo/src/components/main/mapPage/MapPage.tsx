@@ -1,6 +1,4 @@
-import NavBar from "../../utils/NavBar";
-import GMap from "../mapPage/GMap";
-import AnimatedPage from "../../animations/AnimatedPage";
+import AnimatedPage from "../../animations/AnimatedPage"
 
 const animation = {
     initial: { opacity: 0, x: -100 },
