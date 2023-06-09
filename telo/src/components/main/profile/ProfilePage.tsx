@@ -1,6 +1,7 @@
 import Reservations from "./Reservations"
 import ProfileCard from "./ProfileCard"
 import AnimatedPage from "../../animations/AnimatedPage"
+import NavBar from "../../utils/NavBar"
 
 const animation = {
     initial: { opacity: 0, x: -100 },
@@ -10,15 +11,18 @@ const animation = {
 
 const ProfilePage = () => {
     return (
-        <AnimatedPage animation={animation}>
-            <div>
-                <div className='flex flex-col items-center justify-center gap-2 mt-16'>
-                    <ProfileCard />
-                    <Reservations />
-                    <Reservations />
+        <>
+            <NavBar opacity={80} />
+            <AnimatedPage animation={animation}>
+                <div>
+                    <div className='flex flex-col items-center justify-center gap-6 mt-16'>
+                        <ProfileCard />
+                        <Favorites />
+                        <Reservations />
+                    </div>
                 </div>
-            </div>
-        </AnimatedPage>
+            </AnimatedPage>
+        </>
     );
 };
 

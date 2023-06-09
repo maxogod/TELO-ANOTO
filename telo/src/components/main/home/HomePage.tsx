@@ -1,6 +1,7 @@
 import { HotelCard } from "../../hotel/HotelCard"
 import AnimatedPage from "../../animations/AnimatedPage"
 import { hotels } from "../../../utils/mockData"
+import NavBar from "../../utils/NavBar"
 
 const animation = {
     initial: { opacity: 0, x: -100 },
@@ -8,14 +9,23 @@ const animation = {
     exit: { opacity: 0, x: 100 },
 }
 
+const titleCarousel = [
+    'A donde te gustaria ir hoy?',
+    'que sale hoy?',
+]
+
+
 const HomePage = () => {
 
     return (
-        <AnimatedPage animation={animation}>
-            <div>
-                <HotelCard hotel={hotels[0]} />
-            </div>
-        </AnimatedPage>
+        <>
+            <NavBar opacity={80} />
+            <AnimatedPage animation={animation}>
+                <div>
+                    <HotelCard hotel={hotels[0]} title={titleCarousel[Math.floor(Math.random() * titleCarousel.length)]} />
+                </div>
+            </AnimatedPage>
+        </>
     )
 }
 
