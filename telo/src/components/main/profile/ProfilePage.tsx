@@ -13,7 +13,7 @@ const ProfilePage = () => {
     return (
         <AnimatedPage animation={animation}>
             <div>
-                <div className='flex flex-col items-center justify-center gap-6 mt-16'>
+                <div className='flex flex-col items-center justify-center gap-2 mt-16'>
                     <ProfileCard />
                     <Favorites />
                     <Reservations />
