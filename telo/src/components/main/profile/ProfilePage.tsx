@@ -1,6 +1,5 @@
-import Favorites from "./Favorites"
-import ProfileCard from "./ProfileCard"
 import Reservations from "./Reservations"
+import ProfileCard from "./ProfileCard"
 import AnimatedPage from "../../animations/AnimatedPage"
 
 const animation = {
@@ -15,7 +14,7 @@ const ProfilePage = () => {
             <div>
                 <div className='flex flex-col items-center justify-center gap-2 mt-16'>
                     <ProfileCard />
-                    <Favorites />
+                    <Reservations />
                     <Reservations />
                 </div>
             </div>

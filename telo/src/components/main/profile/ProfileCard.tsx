@@ -7,11 +7,11 @@ const ProfileCard = () => {
   return (
     <div className='relative w-80 h-40 rounded-xl'>
       <div className='bg-teloBlack opacity-70 w-full h-full rounded-xl'>
-        <div className="opacity-70 bg-teloWhite w-full h-10 rounded-tl-xl rounded-tr-xl flex items-center">
+        <div className="opacity-90 bg-teloWhite w-full h-10 rounded-tl-xl rounded-tr-xl flex items-center">
           <h1 className='font-bold text-2xl ml-24'>ToroEpico_123</h1>
         </div>
 
-        <div className='opacity-70 flex flex-col items-start justify-center gap-3 absolute right-5 top-14'>
+        <div className=' flex flex-col items-start justify-center gap-3 absolute right-5 top-14'>
           <div className='bg-teloWhite rounded-xl w-52 h-5 flex items-center'>
             <h1 className='font-bold ml-2'>torito@hotmail.com</h1>
           </div>
@@ -19,7 +19,7 @@ const ProfileCard = () => {
             <h1 className='font-bold ml-2'>+11-2588-9858</h1>
           </div>
         </div>
-        <div className='opacity-70 bg-teloWhite rounded-xl w-14 h- absolute top-[91px] left-4'>
+        <div className=' bg-teloWhite rounded-xl w-14 h- absolute top-[91px] left-4'>
           <h1 className='font-bold text-xs text-center'>11/05/03</h1>
         </div>
       </div>
