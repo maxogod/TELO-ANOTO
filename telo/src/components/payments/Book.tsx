@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { Navigate } from "react-router-dom"
 
 import { hotels } from "../../utils/mockData"
-import { setHistory } from "../../utils/favoritesAndHistory"
+import { addCurrentReservation } from "../../utils/favoritesAndHistory"
 
 import locationPin from '../../assets/icons/locationPin.svg'
 import AnimatedPage from "../animations/AnimatedPage"
@@ -29,69 +30,72 @@ const Book = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setHistory(parseInt(hotel_id as string), parseInt(room_id as string))
+        addCurrentReservation(parseInt(hotel_id as string), parseInt(room_id as string))
         setSuccessPopUp(true)
     }
 
     return (
-        <AnimatedPage animation={animation}>
-            <div className="flex items-center justify-center h-screen absolute inset-0">
-                {
-                    successPopUp ? (<SuccessPopUp />)
-                        :
-                        (<>
-                            <div className="relative">
-                                <div className="opacity-80 absolute h-28 bg-slate-500 rounded-t-4xl flex flex-wrap w-80 p-3 pl-6">
-                                    <Link to='/' className="absolute right-6 font-bold text-white z-10">X</Link>
-                                    <h1 className="brightness-200 text-white text-2xl font-bold w-full -mb-7">{hotel?.name}</h1>
-                                    <img className='brightness-200 h-5 text-white' src={locationPin} alt="" />
-                                    <p className="brightness-200 text-white">{hotel?.location}</p>
+        <>
+            {!hotel || !room && (<Navigate to='/404' />)}
+            <AnimatedPage animation={animation}>
+                <div className="flex items-center justify-center h-screen absolute inset-0">
+                    {
+                        successPopUp ? (<SuccessPopUp />)
+                            :
+                            (<>
+                                <div className="relative">
+                                    <div className="opacity-80 absolute h-28 bg-slate-500 rounded-t-4xl flex flex-wrap w-80 p-3 pl-6">
+                                        <Link to='/' className="absolute right-6 font-bold text-white z-10">X</Link>
+                                        <h1 className="brightness-200 text-white text-2xl font-bold w-full -mb-7">{hotel?.name}</h1>
+                                        <img className='brightness-200 h-5 text-white' src={locationPin} alt="" />
+                                        <p className="brightness-200 text-white">{hotel?.location}</p>
+                                    </div>
+                                    <div className="opacity-90 mt-20 bg-slate-100 rounded-4xl flex flex-col w-80 p-3 pb-7 pl-6">
+                                        <h1>{room?.name}</h1>
+                                        <p>${room?.price}</p>
+                                        <h1>Metodos de pago</h1>
+                                        <form className="flex flex-col relative" onSubmit={handleSubmit}>
+                                            <label htmlFor="1">
+                                                Mercado pago
+                                                <input
+                                                    onChange={handleChange}
+                                                    className="absolute right-0 mt-2"
+                                                    type="radio"
+                                                    name="p"
+                                                    id="1"
+                                                    value={'mercado pago'}
+                                                    required />
+                                            </label>
+                                            <label htmlFor="2">
+                                                Debito 4555-xxxx
+                                                <input
+                                                    onChange={handleChange}
+                                                    className="absolute right-0 mt-2"
+                                                    type="radio"
+                                                    name="p"
+                                                    id="2"
+                                                    value={'debito 1'}
+                                                    required />
+                                            </label>
+                                            <label htmlFor="3">
+                                                Debito 4525-xxxx
+                                                <input
+                                                    onChange={handleChange}
+                                                    className="absolute right-0 mt-2"
+                                                    type="radio"
+                                                    name="p"
+                                                    id="3"
+                                                    value={'debito 2'}
+                                                    required />
+                                            </label>
+                                            <button type='submit' className='bg-violet-900 rounded-lg text-white w-28 p-2'>reserva ya</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div className="opacity-90 mt-20 bg-slate-100 rounded-4xl flex flex-col w-80 p-3 pb-7 pl-6">
-                                    <h1>{room?.name}</h1>
-                                    <p>${room?.price}</p>
-                                    <h1>Metodos de pago</h1>
-                                    <form className="flex flex-col relative" onSubmit={handleSubmit}>
-                                        <label htmlFor="1">
-                                            Mercado pago
-                                            <input
-                                                onChange={handleChange}
-                                                className="absolute right-0 mt-2"
-                                                type="radio"
-                                                name="p"
-                                                id="1"
-                                                value={'mercado pago'}
-                                                required />
-                                        </label>
-                                        <label htmlFor="2">
-                                            Debito 4555-xxxx
-                                            <input
-                                                onChange={handleChange}
-                                                className="absolute right-0 mt-2"
-                                                type="radio"
-                                                name="p"
-                                                id="2"
-                                                value={'debito 1'}
-                                                required />
-                                        </label>
-                                        <label htmlFor="3">
-                                            Debito 4525-xxxx
-                                            <input
-                                                onChange={handleChange}
-                                                className="absolute right-0 mt-2"
-                                                type="radio"
-                                                name="p"
-                                                id="3"
-                                                value={'debito 2'}
-                                                required />
-                                        </label>
-                                        <button type='submit' className='bg-violet-900 rounded-lg text-white w-28 p-1'>reserva ya</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </>)}
-            </div>
-        </AnimatedPage>
+                            </>)}
+                </div>
+            </AnimatedPage>
+        </>
     )
 }
 

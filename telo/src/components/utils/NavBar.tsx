@@ -15,7 +15,7 @@ const NavBar = ({ opacity }: { opacity: number }) => {
 
 
   return (
-    <nav className={`bg-navBarPurple opacity-${opacity} fixed bottom-0 w-screen flex justify-around py-1 rounded-tl-2xl rounded-tr-2xl`}>
+    <nav className={`z-10 bg-navBarPurple opacity-${opacity} fixed bottom-0 w-screen flex justify-around py-1 rounded-tl-2xl rounded-tr-2xl`}>
       {sections.map((section) => {
         const isActive = location.pathname === section.url;
         return (

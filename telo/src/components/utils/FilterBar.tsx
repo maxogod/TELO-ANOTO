@@ -70,14 +70,14 @@ function FilterPopUp({ changeFilter, currentFilter, setShowPopUp }:
     }
 
     return (
-        <div className='popup animate-pop-in absolute top-0 left-0 m-8 mt-14 w-72 bg-slate-200 z-20 rounded-b-3xl rounded-r-3xl'>
+        <div className='popup animate-pop-in absolute top-0 left-0 m-8 mt-14 w-72 bg-teloBlack text-white opacity-95 z-20 rounded-b-3xl rounded-r-3xl'>
             <div className='flex flex-col p-3 h-full'>
                 <p className='text-lg font-bold text-left'>Filtros</p>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
                     <div className="flex items-center gap-2">
                         <label htmlFor="cochera" className="cursor-pointer">Cochera</label>
                         <div
-                            className={`relative inline-block w-10 h-6 bg-gray-200 rounded-full ${filter.withGarage ? 'bg-violet-500' : ''}`}
+                            className={`relative inline-block w-10 h-6 rounded-full ${filter.withGarage ? 'bg-violet-500' : 'bg-gray-400'}`}
                             onClick={handleCheck}>
                             <input
                                 type="checkbox"
@@ -90,17 +90,17 @@ function FilterPopUp({ changeFilter, currentFilter, setShowPopUp }:
                     </div>
                     <div className='flex gap-2'>
                         <label htmlFor="distance">Hasta (km)</label>
-                        <input onChange={handleChange} className="w-40 absolute right-0 mr-3" defaultValue={filter.distance} type="number" name="distance" id="distance" required />
+                        <input onChange={handleChange} className="w-40 text-black pl-2 rounded-xl absolute right-0 mr-3" defaultValue={filter.distance} type="number" name="distance" id="distance" required />
                     </div>
                     <div className='flex gap-2'>
                         <label htmlFor="price">Hasta ($)</label>
-                        <input onChange={handleChange} className="w-40 absolute right-0 mr-3" defaultValue={filter.price} type="number" name="price" id="price" required />
+                        <input onChange={handleChange} className="w-40 text-black pl-2 rounded-xl absolute right-0 mr-3" defaultValue={filter.price} type="number" name="price" id="price" required />
                     </div>
                     <div className='flex gap-2'>
                         <label htmlFor="stars">Estrellas</label>
-                        <input onChange={handleChange} className="w-40 absolute right-0 mr-3" defaultValue={filter.stars} type="number" name="stars" id="stars" required />
+                        <input onChange={handleChange} className="w-40 text-black pl-2 rounded-xl absolute right-0 mr-3" defaultValue={filter.stars} type="number" name="stars" id="stars" required />
                     </div>
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center mt-2">
                         <button type="submit" className="rounded-xl bg-violet-900 w-28 text-white">Actualizar</button>
                     </div>
                 </form>
