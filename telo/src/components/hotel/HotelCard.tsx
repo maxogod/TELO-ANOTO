@@ -8,6 +8,7 @@ import heartFill from '../../assets/icons/heartFill.svg'
 import carIcon from '../../assets/icons/carIcon.svg'
 import starIcon from '../../assets/icons/star.svg'
 import locationPin from '../../assets/icons/locationPin.svg'
+import qrCode from '../../assets/icons/qrCode.png'
 
 interface Hotel {
     id: number,
@@ -68,9 +69,20 @@ const HotelCard = ({ hotel, title }: { hotel: Hotel, title: string }) => {
     )
 }
 
-const HotelThumbNail = () => {
+const HotelThumbNail = ({ hotel }: { hotel: Hotel }) => {
     return (
         <div>
+            <div className='bg-white  w-80 h-20 mt-2 rounded-3xl '>
+                <div className='absolute bg-reservationPurple w-20 h-20 right-0 rounded-3xl  flex justify-center items-center'>
+                    <img src={qrCode} className='w-14 h-14' alt="" />
+                </div>
+
+                <div className='absolute bg-slate-200 w-24 h-20 left-0 rounded-3xl  flex justify-center items-center'>
+                    <img src={hotel.picture} className='w-14 h-14' alt="" />
+                </div>
+
+
+            </div>
 
         </div>
     )

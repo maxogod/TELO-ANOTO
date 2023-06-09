@@ -1,6 +1,5 @@
-import Favorites from "./Favorites"
-import ProfileCard from "./ProfileCard"
 import Reservations from "./Reservations"
+import ProfileCard from "./ProfileCard"
 import AnimatedPage from "../../animations/AnimatedPage"
 import NavBar from "../../utils/NavBar"
 
