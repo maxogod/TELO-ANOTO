@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 
 import BackgroundAuth from '../utils/BackgroundAuth'
-import { logInUser } from '../../utils/localStorage'
+import { logInUser } from '../../utils/authHandling'
 
 import logo from '../../assets/logo.svg'
 import arrowEnter from '../../assets/icons/arrowEnter.svg'

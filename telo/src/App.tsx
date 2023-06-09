@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 
-import { getSessionUser } from './utils/localStorage'
+import { getSessionUser } from './utils/authHandling'
 
 import LoadingPage from './components/loading/LoadingPage'
 import Login from './components/auth/Login'
@@ -10,7 +10,6 @@ import HomePage from './components/main/home/HomePage'
 import MapPage from './components/main/mapPage/MapPage'
 import ProfilePage from './components/main/profile/ProfilePage'
 import Book from './components/payments/Book'
-import NavBar from './components/utils/NavBar'
 import FilterBar from './components/utils/FilterBar'
 import BackgroundMain from './components/utils/BackgroundMain'
 
@@ -28,8 +27,7 @@ function App() {
   return (
     <BrowserRouter>
       <BackgroundMain />
-      <NavBar opacity={80} />
-      <FilterBar numOfStars={2} distanceInKm={5} priceInPesos={10000} />
+      <FilterBar />
       <Routes>
         <Route path='/' element={
           loading ? <LoadingPage /> : (user ? <HomePage /> : <Navigate to='/login' />)

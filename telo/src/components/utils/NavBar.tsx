@@ -11,7 +11,7 @@ const NavBar = ({ opacity }: { opacity: number }) => {
     { id: 'map', url: '/map', icon: map },
     { id: 'home', url: '/', icon: home },
     { id: 'profile', url: '/profile', icon: profile },
-  ];
+  ]
 
 
   return (
@@ -26,10 +26,10 @@ const NavBar = ({ opacity }: { opacity: number }) => {
               className={`h-full w-full  ${isActive ? 'invert' : 'none'}`}
             />
           </Link>
-        );
+        )
       })}
     </nav>
-  );
-};
+  )
+}
 
 export default NavBar;

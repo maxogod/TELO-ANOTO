@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
+import { useState } from "react"
+
+import { toggleFavorite, getFavorites } from "../../utils/favoritesAndHistory"
 
 import heart from '../../assets/icons/heart.svg'
+import heartFill from '../../assets/icons/heartFill.svg'
 import carIcon from '../../assets/icons/carIcon.svg'
 import starIcon from '../../assets/icons/star.svg'
 import locationPin from '../../assets/icons/locationPin.svg'
@@ -21,28 +25,28 @@ interface Room {
     id: number,
 }
 
-const HotelCard = ({ hotel }: { hotel: Hotel }) => {
+const HotelCard = ({ hotel, title }: { hotel: Hotel, title: string }) => {
 
-    const titleCarousel = [
-        'A donde te gustaria ir hoy?',
-        'que sale hoy?',
-    ]
+    const [favorite, setFavorite] = useState(getFavorites()?.includes(hotel.id) ? true : false)
 
     const stars = getStarObjects(hotel.stars)
 
-    const handleFavorite = () => { }
+    const handleToggleFavorite = () => {
+        toggleFavorite(hotel.id)
+        setFavorite(!favorite)
+    }
 
     return (
         <div className="flex flex-col gap-2 justify-center items-center" style={{ height: '60vh' }}>
-            <p className="text-white opacity-60">{titleCarousel[Math.floor(Math.random() * titleCarousel.length)]}</p>
+            <p className="text-white opacity-60">{title}</p>
             <div className="bg-white opacity-90 w-80 border rounded-4xl">
                 <div id="image" className="relative">
-                    <button onClick={handleFavorite} className="absolute top-3 right-3 text-white"><img src={heart} alt="favorite" /></button>
+                    <button onClick={handleToggleFavorite} className="absolute top-3 right-3 text-white"><img src={favorite ? heartFill : heart} alt="favorite" /></button>
                     <img className="rounded-t-4xl object-cover" style={{ height: '26rem' }} src={hotel.picture} alt="hotel pic" />
                     <h1 className="absolute bottom-20 left-2 text-white text-2xl font-bold">{hotel.name}</h1>
                     <img className='absolute bottom-16 h-5 left-2 text-white' src={locationPin} alt="" />
                     <p className="absolute bottom-16 scale-90 left-6 text-white">{hotel.location}</p>
-                    <div className="bg-slate-100 rounded-4xl flex flex-col absolute w-80 h-56 -bottom-40 overflow-y-scroll overflow-x-hidden p-3">
+                    <div className="bg-slate-100 rounded-4xl flex flex-col absolute -ml-[1px] w-80 h-56 -bottom-40 overflow-y-scroll overflow-x-hidden p-3">
                         {hotel.parkingLot && <img className='absolute right-4 top-4' src={carIcon} alt="parking lot" />}
                         <div id='stars' className='flex pl-2 mb-4 mt-3'>
                             {stars.map((star, index) => (
