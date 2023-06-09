@@ -12,6 +12,7 @@ interface User {
     dateBirth: Date;
     favoritesById?: number[];
     historyById?: hotelAndRoom[];
+    currentReservationsById?: hotelAndRoom[];
 }
 
 function logInUser(email: string, password: string) {
@@ -32,6 +33,7 @@ function registerUser(user: User) {
         user.password = hashPassword(user.password);
         user.favoritesById = [];
         user.historyById = [];
+        user.currentReservationsById = [];
         localStorage.setItem(user.email, JSON.stringify(user));
         return user;
     }

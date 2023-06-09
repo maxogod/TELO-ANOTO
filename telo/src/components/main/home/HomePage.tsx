@@ -11,7 +11,11 @@ const animation = {
 
 const titleCarousel = [
     'A donde te gustaria ir hoy?',
-    'que sale hoy?',
+    'sale telo?',
+    'que ondaaa',
+    'que pinta?',
+    'que sale?',
+    'hoy se sale',
 ]
 
 

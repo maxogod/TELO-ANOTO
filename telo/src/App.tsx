@@ -12,6 +12,7 @@ import ProfilePage from './components/main/profile/ProfilePage'
 import Book from './components/payments/Book'
 import FilterBar from './components/utils/FilterBar'
 import BackgroundMain from './components/utils/BackgroundMain'
+import NotFound from './components/utils/NotFound'
 
 function App() {
 
@@ -34,9 +35,10 @@ function App() {
         } />
         <Route path='/login' element={user ? <Navigate to='/' /> : <Login setUser={setUser} />} />
         <Route path='/signup' element={user ? <Navigate to='/' /> : <SignUp setUser={setUser} />} />
-        <Route path='/map' element={<MapPage />} />
-        <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/book/:hotel_id/:room_id' element={<Book />} />
+        <Route path='/map' element={user ? <MapPage /> : <Navigate to='/login' />} />
+        <Route path='/profile' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
+        <Route path='/book/:hotel_id/:room_id' element={user ? <Book /> : <Navigate to='/login' />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
