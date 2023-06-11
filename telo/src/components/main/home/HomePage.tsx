@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+
 import { HotelCard } from "../../hotel/HotelCard"
 import AnimatedPage from "../../animations/AnimatedPage"
 import { hotels } from "../../../utils/mockData"
@@ -9,24 +11,33 @@ const animation = {
     exit: { opacity: 0, x: 100 },
 }
 
-const titleCarousel = [
-    'A donde te gustaria ir hoy?',
-    'sale telo?',
-    'que ondaaa',
-    'que pinta?',
-    'que sale?',
-    'hoy se sale',
-]
 
+const HomePage = ({ currentHotelIndex, setCurrentHotelIndex }:
+    { currentHotelIndex: number, setCurrentHotelIndex: Function }) => {
 
-const HomePage = () => {
+    const [currentHotel, setCurrentHotel] = useState(hotels[currentHotelIndex])
+
+    useEffect(() => {
+        setCurrentHotel(hotels[currentHotelIndex])
+    }, [currentHotelIndex])
+
+    const handleNextHotel = () => {
+        setCurrentHotelIndex((currentHotelIndex + 1) % hotels.length)
+    }
+
+    const handlePrevHotel = () => {
+        setCurrentHotelIndex((currentHotelIndex - 1 + hotels.length) % hotels.length)
+    }
 
     return (
         <>
             <NavBar opacity={80} />
             <AnimatedPage animation={animation}>
                 <div>
-                    <HotelCard hotel={hotels[0]} title={titleCarousel[Math.floor(Math.random() * titleCarousel.length)]} />
+                    <HotelCard
+                        hotel={currentHotel}
+                        handleNextHotel={handleNextHotel}
+                        handlePrevHotel={handlePrevHotel} />
                 </div>
             </AnimatedPage>
         </>

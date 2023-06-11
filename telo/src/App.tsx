@@ -18,6 +18,7 @@ function App() {
 
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(getSessionUser())
+  const [currentHotelIndex, setCurrentHotelIndex] = useState(0)
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,7 +32,10 @@ function App() {
       <FilterBar />
       <Routes>
         <Route path='/' element={
-          loading ? <LoadingPage /> : (user ? <HomePage /> : <Navigate to='/login' />)
+          loading ? <LoadingPage /> : (user ? <HomePage
+            currentHotelIndex={currentHotelIndex}
+            setCurrentHotelIndex={setCurrentHotelIndex} />
+            : <Navigate to='/login' />)
         } />
         <Route path='/login' element={user ? <Navigate to='/' /> : <Login setUser={setUser} />} />
         <Route path='/signup' element={user ? <Navigate to='/' /> : <SignUp setUser={setUser} />} />
