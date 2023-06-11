@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useEffect, useState, useRef } from "react"
 
 import { toggleFavorite, getFavorites } from "../../utils/favoritesAndHistory"
+import QrPopUp from "../utils/PopUp"
 import { hotels } from "../../utils/mockData"
 
 import heart from '../../assets/icons/heart.svg'
@@ -10,6 +11,10 @@ import carIcon from '../../assets/icons/carIcon.svg'
 import starIcon from '../../assets/icons/star.svg'
 import locationPin from '../../assets/icons/locationPin.svg'
 import qrCode from '../../assets/icons/qrCode.png'
+import mapThumbNail from '../../assets/icons/mapThumbNail.svg'
+import cancel from '../../assets/icons/cancel.svg'
+
+
 
 interface Hotel {
     id: number,
@@ -37,7 +42,6 @@ const titleCarousel = [
 ]
 
 const title = titleCarousel[Math.floor(Math.random() * titleCarousel.length)]
-
 
 const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
     { hotel: Hotel, handleNextHotel: () => void, handlePrevHotel: () => void }) => {
@@ -113,10 +117,17 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
     )
 }
 
-const HotelThumbNail = ({ hotelId, roomId }: { hotelId: string, roomId: string }) => {
+const HotelThumbNail = ({ hotelId, roomId }: { hotelId: number, roomId: number }) => {
 
-    const hotel = hotels.find(h => h.id === parseInt(hotelId as string))
-    const room = hotel?.availableRooms.find(r => r.id === parseInt(roomId as string))
+    const hotel = hotels.find(h => h.id === hotelId)
+    const room = hotel?.availableRooms.find(r => r.id === roomId)
+
+     const [showPopUp, setShowPopUp] = useState(false);
+
+    const handleQrCodeClick = () => {
+        console.log("qr code generated");
+        setShowPopUp(true)
+    }
 
 
     return (
@@ -124,25 +135,25 @@ const HotelThumbNail = ({ hotelId, roomId }: { hotelId: string, roomId: string }
             <div className='bg-white  w-80 h-20 mt-2 rounded-3xl '>
 
 
-                <div className=" absolute mt-1 left-24  flex flex-col">
-                    <span className="text-black">{hotel?.name} - {hotel?.location}</span>
-                    <span className="text-black">{room?.name} - {room?.price}</span>
-                    <span className="text-black">FALTA ROOM DATE</span>
+                <div className=" absolute mt-1 left-20 pl-1  flex flex-col text-[12px]">
+                    <h1 className="text-black font-bold">{hotel?.name} - {hotel?.location}</h1>
+                    <h2  className="text-gray-700 font-bold">{room?.name} - ${room?.price}</h2 >
+                    <h3 className="text-gray-700 text-[10px]">FALTA ROOM DATE</h3>
+                    <div className="flex  mt-[1px]  space-x-4 ">
+                    <img src={mapThumbNail}  className='w-5 h-5 ' alt="" />
+                    <img src={cancel} className='w-5 h-5 ' alt="" />
+                </div>
                 </div>
 
 
-                <div className='absolute bg-reservationPurple w-20 h-20 right-0 rounded-3xl  flex justify-center items-center'>
+                <div className='absolute bg-reservationPurple w-20 h-20 right-0 rounded-3xl  flex justify-center items-center'  onClick={handleQrCodeClick}>
                     <img src={qrCode} className='w-14 h-14' alt="" />
                 </div>
-
-                <div className='absolute bg-black w-24 h-20 left-0 rounded-3xl flex justify-center items-center'>
-                    <img src={hotel?.picture} className='w-full h-full rounded-3xl' alt="" />
+                <div className='absolute bg-black w-20 h-20 left-0 rounded-3xl flex justify-center items-center'>
+                      <img src={hotel?.picture} className='w-full h-full rounded-3xl' alt="" />
                 </div>
-
-
-
             </div>
-
+            {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room}  />}
         </div>
     )
 }
