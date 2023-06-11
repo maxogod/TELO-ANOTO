@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 import { toggleFavorite, getFavorites } from "../../utils/favoritesAndHistory"
+import QrPopUp from "../utils/PopUp"
+import { hotels } from "../../utils/mockData"
 
 import heart from '../../assets/icons/heart.svg'
 import heartFill from '../../assets/icons/heartFill.svg'
@@ -11,8 +13,8 @@ import locationPin from '../../assets/icons/locationPin.svg'
 import qrCode from '../../assets/icons/qrCode.png'
 import mapThumbNail from '../../assets/icons/mapThumbNail.svg'
 import cancel from '../../assets/icons/cancel.svg'
-import { hotels } from "../../utils/mockData"
-import QrPopUp from "../utils/PopUp"
+
+
 
 interface Hotel {
     id: number,
@@ -30,20 +32,61 @@ interface Room {
     id: number,
 }
 
+const titleCarousel = [
+    'A donde te gustaria ir hoy?',
+    'sale telo?',
+    'que ondaaa',
+    'que pinta?',
+    'que sale?',
+    'hoy se sale',
+]
 
-const HotelCard = ({ hotel, title }: { hotel: Hotel, title: string }) => {
+const title = titleCarousel[Math.floor(Math.random() * titleCarousel.length)]
 
-    const [favorite, setFavorite] = useState(getFavorites()?.includes(hotel.id) ? true : false)
+const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
+    { hotel: Hotel, handleNextHotel: () => void, handlePrevHotel: () => void }) => {
+    const [favorite, setFavorite] = useState(getFavorites()?.includes(hotel.id))
+    const touchStartRef = useRef(0)
+    const touchEndRef = useRef(0)
+
+    useEffect(() => {
+        setFavorite(getFavorites()?.includes(hotel.id))
+    }, [hotel])
 
     const stars = getStarObjects(hotel.stars)
 
     const handleToggleFavorite = () => {
         toggleFavorite(hotel.id)
         setFavorite(!favorite)
+    };
+
+    const handleSwipe = () => {
+        const touchDiff = touchEndRef.current - touchStartRef.current;
+        if (touchDiff > 50) {
+            // Swiped right, go to prev hotel
+            handlePrevHotel()
+        } else if (touchDiff < -50) {
+            // Swiped left, go to next hotel
+            handleNextHotel()
+        }
+    }
+
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+        touchStartRef.current = e.touches[0].clientX;
+    }
+
+    const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+        touchEndRef.current = e.changedTouches[0].clientX;
+        handleSwipe()
     }
 
     return (
-        <div className="flex flex-col gap-2 justify-center items-center" style={{ height: '60vh' }}>
+        <div
+            className="flex flex-col gap-2 justify-center items-center"
+            style={{ height: '60vh' }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+        >
             <p className="text-white opacity-60">{title}</p>
             <div className="bg-white opacity-90 w-80 border rounded-4xl">
                 <div id="image" className="relative">
@@ -86,7 +129,7 @@ const HotelThumbNail = ({ hotelId, roomId }: { hotelId: number, roomId: number }
         setShowPopUp(true)
     }
 
-    
+
     return (
         <div>
             <div className='bg-white  w-80 h-20 mt-2 rounded-3xl '>
@@ -106,11 +149,9 @@ const HotelThumbNail = ({ hotelId, roomId }: { hotelId: number, roomId: number }
                 <div className='absolute bg-reservationPurple w-20 h-20 right-0 rounded-3xl  flex justify-center items-center'  onClick={handleQrCodeClick}>
                     <img src={qrCode} className='w-14 h-14' alt="" />
                 </div>
-
                 <div className='absolute bg-black w-20 h-20 left-0 rounded-3xl flex justify-center items-center'>
                       <img src={hotel?.picture} className='w-full h-full rounded-3xl' alt="" />
                 </div>
-
             </div>
             {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room}  />}
         </div>

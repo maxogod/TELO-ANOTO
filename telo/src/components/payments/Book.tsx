@@ -88,7 +88,7 @@ const Book = () => {
                                                     value={'debito 2'}
                                                     required />
                                             </label>
-                                            <button type='submit' className='bg-violet-900 rounded-lg text-white w-28 p-2'>reserva ya</button>
+                                            <button type='submit' className='bg-violet-900 rounded-lg text-white w-28 p-1'>reserva ya</button>
                                         </form>
                                     </div>
                                 </div>
