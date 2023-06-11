@@ -4,7 +4,13 @@ import { HotelThumbNail } from '../../hotel/HotelCard'
 import { hotels } from '../../../utils/mockData';
 
 
-const Reservations = () => {
+type hotelAndRoom = {
+  hotelId: number;
+  roomId: number;
+}
+
+
+const Reservations = ({currentReservations} : {currentReservations : hotelAndRoom[]}) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpand = () => {
@@ -19,7 +25,11 @@ const Reservations = () => {
       <div className={`absolute top-1 right-0 bottom-0 pr-2`}>
         <img src={expand_down} className={`duration-300 ease-in-out ${expanded ? 'rotate-180' : ''}`} alt="" />
       </div>
-      
+      {currentReservations.map((reservation) => (
+          <div>
+            <HotelThumbNail hotelId={reservation.hotelId} roomId={reservation.roomId}/>
+          </div>
+        ))}
     </div>
   </div>
 
