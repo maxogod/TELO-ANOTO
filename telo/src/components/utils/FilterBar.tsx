@@ -101,7 +101,7 @@ function FilterPopUp({ changeFilter, currentFilter, setShowPopUp }:
                         <input onChange={handleChange} className="w-40 text-black pl-2 rounded-xl absolute right-0 mr-3" defaultValue={filter.stars} type="number" name="stars" id="stars" required />
                     </div>
                     <div className="flex justify-center items-center mt-2">
-                        <button type="submit" className="rounded-xl bg-violet-900 w-28 text-white">Actualizar</button>
+                        <button type="submit" className="rounded-xl bg-violet-900 w-28 text-white hover:brightness-150 hover:scale-110 transition duration-300">Actualizar</button>
                     </div>
                 </form>
             </div>

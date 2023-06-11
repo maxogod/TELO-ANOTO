@@ -91,7 +91,7 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
             <p className="text-white opacity-60">{title}</p>
             <div className="bg-white opacity-90 w-80 border rounded-4xl">
                 <div id="image" className="relative">
-                    <button onClick={handleToggleFavorite} className="absolute top-3 right-3 text-white"><img src={favorite ? heartFill : heart} alt="favorite" /></button>
+                    <button onClick={handleToggleFavorite} className="absolute top-3 right-3 text-white hover:animate-wiggle"><img src={favorite ? heartFill : heart} alt="favorite" /></button>
                     <img className="rounded-t-4xl object-cover" style={{ height: '26rem' }} src={hotel.picture} alt="hotel pic" />
                     <h1 className="absolute bottom-20 left-2 text-white text-2xl font-bold">{hotel.name}</h1>
                     <img className='absolute bottom-16 h-5 left-2 text-white' src={locationPin} alt="" />
@@ -108,7 +108,7 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
                             <div key={index} className='ml-3 relative mb-4'>
                                 <h1 className="text-xl font-bold">{room.name}</h1>
                                 <p className="text-xl opacity-70 font-bold">${room.price}</p>
-                                <Link to={`/book/${hotel.id}/${room.id}`} className='bg-violet-900 rounded-lg text-white p-1 absolute right-3 top-4'>reserva ya</Link>
+                                <Link to={`/book/${hotel.id}/${room.id}`} className='bg-violet-900 rounded-lg text-white p-1 absolute right-3 top-4 hover:brightness-150 hover:scale-110 transition duration-300'>reserva ya</Link>
                             </div>
                         ))}
                     </div>
@@ -169,4 +169,3 @@ function getStarObjects(numOfStars: number) {
 }
 
 export { HotelCard, HotelThumbNail }
-
