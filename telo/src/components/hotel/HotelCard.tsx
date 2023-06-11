@@ -12,6 +12,7 @@ import qrCode from '../../assets/icons/qrCode.png'
 import mapThumbNail from '../../assets/icons/mapThumbNail.svg'
 import cancel from '../../assets/icons/cancel.svg'
 import { hotels } from "../../utils/mockData"
+import QrPopUp from "../utils/PopUp"
 
 interface Hotel {
     id: number,
@@ -78,6 +79,13 @@ const HotelThumbNail = ({ hotelId, roomId }: { hotelId: number, roomId: number }
     const hotel = hotels.find(h => h.id === hotelId)
     const room = hotel?.availableRooms.find(r => r.id === roomId)
 
+     const [showPopUp, setShowPopUp] = useState(false);
+
+    const handleQrCodeClick = () => {
+        console.log("qr code generated");
+        setShowPopUp(true)
+    }
+
     
     return (
         <div>
@@ -95,7 +103,7 @@ const HotelThumbNail = ({ hotelId, roomId }: { hotelId: number, roomId: number }
                 </div>
 
 
-                <div className='absolute bg-reservationPurple w-20 h-20 right-0 rounded-3xl  flex justify-center items-center'>
+                <div className='absolute bg-reservationPurple w-20 h-20 right-0 rounded-3xl  flex justify-center items-center'  onClick={handleQrCodeClick}>
                     <img src={qrCode} className='w-14 h-14' alt="" />
                 </div>
 
@@ -103,10 +111,8 @@ const HotelThumbNail = ({ hotelId, roomId }: { hotelId: number, roomId: number }
                       <img src={hotel?.picture} className='w-full h-full rounded-3xl' alt="" />
                 </div>
 
-                
-
             </div>
-
+            {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room}  />}
         </div>
     )
 }
