@@ -21,7 +21,7 @@ const ProfilePage = () => {
                 <div>
                     <div className='flex flex-col items-center justify-center gap-6 mt-16'>
                         <ProfileCard name={user?.email.split("@")[0] as string} email={user?.email as string} phone={user?.phone as number} birthday={user?.dateBirth as Date}  />
-                        <Reservations />
+                        <Reservations currentReservations={user?.currentReservationsById as []}/>
                     </div>
                 </div>
             </AnimatedPage>
