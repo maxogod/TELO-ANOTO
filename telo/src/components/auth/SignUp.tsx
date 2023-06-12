@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import BackgroundAuth from '../utils/BackgroundAuth'
 import { registerUser, logInUser } from '../../utils/authHandling'
+import BackgroundAuth from '../utils/BackgroundAuth'
 
 import atSymbol from '../../assets/icons/atSymbol.svg'
 import lock from '../../assets/icons/lock.svg'
@@ -31,7 +31,7 @@ const SignUp = ({ setUser }: { setUser: setUserFunction }) => {
   })
 
   const validateInfo = () => {
-    if (!/^(\+?54)?(9)?([0-9]{2})?([0-9]{3})([0-9]{4})$/.test(userInfo.phone)) return false
+    if (!/^(?:\+?54)?[0-9]{10}$/.test(userInfo.phone)) return false
     const today = new Date()
     const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate())
     if ((new Date(userInfo.dateBirth)) > eighteenYearsAgo) return false
@@ -58,6 +58,7 @@ const SignUp = ({ setUser }: { setUser: setUserFunction }) => {
     if (user) setUser(user)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleGoogleAuth = () => { }
 
   const labels = [

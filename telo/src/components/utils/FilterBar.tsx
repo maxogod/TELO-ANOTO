@@ -39,6 +39,7 @@ const FilterBar = () => {
 }
 
 function FilterPopUp({ changeFilter, currentFilter, setShowPopUp }:
+    // eslint-disable-next-line @typescript-eslint/ban-types
     { changeFilter: Function, currentFilter: filter, setShowPopUp: Function }) {
 
     const [filter, setFilter] = useState({
