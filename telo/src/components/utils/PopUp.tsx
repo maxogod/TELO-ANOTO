@@ -19,7 +19,7 @@ interface Room {
   id: number,
 }
 
-const QrPopUp = ({setShowPopUp, hotel, room}: {setShowPopUp: React.Dispatch<React.SetStateAction<boolean>>, hotel: Hotel, room: Room}) => {
+const QrPopUp = ({setShowPopUp, hotel, room, onRemove}: {setShowPopUp: React.Dispatch<React.SetStateAction<boolean>>, hotel: Hotel, room: Room, onRemove: () => void }) => {
 
 
   const handleClosePopUp = () => {
@@ -29,12 +29,13 @@ const QrPopUp = ({setShowPopUp, hotel, room}: {setShowPopUp: React.Dispatch<Reac
   const handleExpireCurrentReservation = () => {
     expireCurrentReservation(hotel.id, room.id)
     setShowPopUp(false)
+    onRemove(); // Call the callback function to handle removal
   };
-   
+
     return (
       <div>
             <div className="fixed inset-0 flex items-center justify-center z-10">
-          <div className="absolute inset-0 backdrop-filter backdrop-blur-sm"></div>
+            <div className="absolute inset-0 backdrop-filter backdrop-blur-sm"></div>
           <div className="bg-slate-100 rounded-3xl p-8 max-w-screen-sm max-h-screen-90 overflow-y-auto relative">
 
           <button
@@ -47,7 +48,7 @@ const QrPopUp = ({setShowPopUp, hotel, room}: {setShowPopUp: React.Dispatch<Reac
                 <h2 className="text-xl font-bold">{hotel.location}</h2>
                 <h3>{room.name} - ${room.price}</h3>
                 <h3>room date and time</h3>
-                <img className='w-52 h-52 ' onClick={handleExpireCurrentReservation} src={defaultQrCode} alt={defaultQrCode}/>
+                <img src={defaultQrCode} alt={defaultQrCode} className='w-52 h-52 ' onClick={handleExpireCurrentReservation}/>
             </div>
           </div>
         </div>

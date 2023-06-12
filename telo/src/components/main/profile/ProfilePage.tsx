@@ -1,8 +1,9 @@
-import Reservations from "./Reservations"
+import {Reservations, History} from './ProfileComponents'
 import ProfileCard from "./ProfileCard"
 import AnimatedPage from "../../animations/AnimatedPage"
 import NavBar from "../../utils/NavBar"
 import { getSessionUser } from "../../../utils/authHandling"
+import {useState, useEffect } from "react"
 
 const animation = {
     initial: { opacity: 0, x: -100 },
@@ -12,7 +13,27 @@ const animation = {
 
 const ProfilePage = () => {
 
-    const user = getSessionUser();
+    const user = getSessionUser()
+
+    const [reservationLength, setReservationLength] = useState(user?.currentReservationsById?.length || 0);
+    const [historyLength, setHistoryLength] = useState(user?.historyById?.length || 0);
+
+    useEffect(() => {
+        setReservationLength(user?.currentReservationsById?.length || 0);
+    }, [user?.currentReservationsById?.length]);
+
+    useEffect(() => {
+        setHistoryLength(user?.historyById?.length || 0);
+    }, [user?.historyById?.length]);
+
+    useEffect(() => {
+        if (reservationLength !== user?.currentReservationsById?.length || historyLength !== user?.historyById?.length) {
+        console.log("RELOAD");
+        
+        window.location.reload();
+        }
+    }, [reservationLength, historyLength, user?.currentReservationsById?.length, user?.historyById?.length]);
+
 
     return (
         <>
@@ -20,8 +41,9 @@ const ProfilePage = () => {
             <AnimatedPage animation={animation}>
                 <div>
                     <div className='flex flex-col items-center justify-center gap-6 mt-16'>
-                        <ProfileCard name={user?.email.split("@")[0] as string} email={user?.email as string} phone={user?.phone as number} birthday={user?.dateBirth as Date}  />
+                        <ProfileCard user={user as any}  />
                         <Reservations currentReservations={user?.currentReservationsById as []}/>
+                        <History history={user?.historyById as []} />
                     </div>
                 </div>
             </AnimatedPage>
