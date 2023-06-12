@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import BackgroundAuth from '../utils/BackgroundAuth'
 import { registerUser, logInUser } from '../../utils/authHandling'
+import BackgroundAuth from '../utils/BackgroundAuth'
 
 import atSymbol from '../../assets/icons/atSymbol.svg'
 import lock from '../../assets/icons/lock.svg'

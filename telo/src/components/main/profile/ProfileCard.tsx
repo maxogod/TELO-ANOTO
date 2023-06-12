@@ -1,14 +1,16 @@
-import default_pic from '../../../assets/default_pic.jpg'
-import edit from '../../../assets/icons/edit.svg'
-import slide from '../../../assets/icons/slide.svg'
-import {useState} from "react"
-import atSymbol from '../../../assets/icons/atSymbol.svg'
+import { useState } from "react"
+
+import { getSessionUser, updateUser } from '../../../utils/authHandling'
+
 import lock from '../../../assets/icons/lock.svg'
 import calendar from '../../../assets/icons/calendar.svg'
 import phone from '../../../assets/icons/phone.svg'
 import arrowEnter from '../../../assets/icons/arrowEnter.svg'
 import close from '../../../assets/icons/cancel.svg'
-import {getSessionUser, updateUser} from '../../../utils/authHandling'
+import default_pic from '../../../assets/default_pic.jpg'
+import edit from '../../../assets/icons/edit.svg'
+import slide from '../../../assets/icons/slide.svg'
+
 
 interface User {
   email: string;
@@ -71,7 +73,7 @@ const ProfileCard = () => {
   );
 };
 
-const EditProfile = ({user, setUser, setShowPopUp}: {user : User, setUser: React.Dispatch<React.SetStateAction<User>> , setShowPopUp: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const EditProfile = ({setUser, setShowPopUp}: {user : User, setUser: React.Dispatch<React.SetStateAction<User>> , setShowPopUp: React.Dispatch<React.SetStateAction<boolean>>}) => {
 
 
   const [error, setError] = useState('')
@@ -100,7 +102,10 @@ const EditProfile = ({user, setUser, setShowPopUp}: {user : User, setUser: React
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
+    if (!validateInfo()) {
+      setError('error al validar los datos')
+      return
+    }
     setUser((prevUser) => ({
       email: prevUser.email,
       phone: userInfo.phone ? parseInt(userInfo.phone) : prevUser.phone,

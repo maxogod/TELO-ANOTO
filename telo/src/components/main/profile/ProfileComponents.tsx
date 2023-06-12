@@ -1,4 +1,5 @@
 import  { useState, useEffect } from 'react';
+
 import expand_down from '../../../assets/icons/expand_down.svg';
 import { HotelThumbNail } from '../../hotel/HotelCard';
 
@@ -27,7 +28,7 @@ const ListComponent = ({name, hotels, isExpired }: { name: string, hotels: hotel
 
 
   return (
-    <div className={`relative ${expanded ? ' ' : 'w-80 h-8'} rounded-s-2xl overflow-hidden transition-all duration-700`}>
+    <div className={`relative ${expanded ? '' : 'w-80 h-8'} rounded-s-2xl overflow-hidden transition-all duration-700`}>
       <div className='bg-teloBlack bg-opacity-70 w-80 h-full rounded-xl flex flex-col items-start justify-start'>
         <div onClick={handleExpand} className='w-80'>
           <span className={`text-white text-xl ml-3 mt-0`}>{name}</span>
@@ -59,5 +60,10 @@ const Reservations = ({ currentReservations }: { currentReservations: hotelAndRo
     <ListComponent name='Reservaciones' hotels={currentReservations} isExpired={false}/>
   );
 };
+
+const Favorites = () => {
+
+  return
+}
 
 export {Reservations, History}
