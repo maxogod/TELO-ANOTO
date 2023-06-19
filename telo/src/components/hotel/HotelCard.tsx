@@ -150,7 +150,6 @@ const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: num
                         <img src={qrCode} className='w-14 h-14' alt="" />
                     </div>
                 </div>
-
             </div>
             {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room} onRemove={onRemove} />}
         </div>
