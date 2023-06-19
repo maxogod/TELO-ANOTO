@@ -64,4 +64,5 @@ function getSessionUser() {
     return null;
 }
 
-export { logInUser, registerUser, getSessionUser, updateUser };
+export { logInUser, registerUser, getSessionUser, updateUser }
+export type { hotelAndRoom, User };
