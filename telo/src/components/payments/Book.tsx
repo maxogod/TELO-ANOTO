@@ -30,7 +30,8 @@ const Book = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        addCurrentReservation(parseInt(hotel_id as string), parseInt(room_id as string))
+        const selectedTime = new Date((e.currentTarget.elements.namedItem('selectedTime') as HTMLInputElement).value);
+        addCurrentReservation(parseInt(hotel_id as string), parseInt(room_id as string), selectedTime)
         setSuccessPopUp(true)
     }
 
@@ -53,42 +54,22 @@ const Book = () => {
                                     <div className="opacity-90 mt-20 bg-slate-100 rounded-4xl flex flex-col w-80 p-3 pb-7 pl-6">
                                         <h1>{room?.name}</h1>
                                         <p>${room?.price}</p>
-                                        <h1>Metodos de pago</h1>
+                                        <h1>Horas disponibles</h1>
                                         <form className="flex flex-col relative" onSubmit={handleSubmit}>
-                                            <label htmlFor="1">
-                                                Mercado pago
-                                                <input
-                                                    onChange={handleChange}
-                                                    className="absolute right-0 mt-2"
-                                                    type="radio"
-                                                    name="p"
-                                                    id="1"
-                                                    value={'mercado pago'}
-                                                    required />
-                                            </label>
-                                            <label htmlFor="2">
-                                                Debito 4555-xxxx
-                                                <input
-                                                    onChange={handleChange}
-                                                    className="absolute right-0 mt-2"
-                                                    type="radio"
-                                                    name="p"
-                                                    id="2"
-                                                    value={'debito 1'}
-                                                    required />
-                                            </label>
-                                            <label htmlFor="3">
-                                                Debito 4525-xxxx
-                                                <input
-                                                    onChange={handleChange}
-                                                    className="absolute right-0 mt-2"
-                                                    type="radio"
-                                                    name="p"
-                                                    id="3"
-                                                    value={'debito 2'}
-                                                    required />
-                                            </label>
-                                            <button type='submit' className='bg-violet-900 rounded-lg text-white w-28 p-1'>reserva ya</button>
+                                            {room?.availableTimes.map((time, index) => (
+                                                <label htmlFor={index.toString()} key={index}>
+                                                    {`${time.toString().slice(16, 21)}`}
+                                                    <input
+                                                        onChange={handleChange}
+                                                        className="absolute right-0 mt-2"
+                                                        type="radio"
+                                                        name="selectedTime"
+                                                        id={index.toString()}
+                                                        value={time.toString()}
+                                                        required />
+                                                </label>
+                                            ))}
+                                            <button type='submit' className='mt-4 bg-violet-900 rounded-lg text-white p-1'>Pagar con Mercado Pago</button>
                                         </form>
                                     </div>
                                 </div>
