@@ -11,16 +11,32 @@ const hotels = [
             {
                 name: "King",
                 price: 10000,
+                availableTimes: [
+                    new Date("2021-10-10T10:00:00"),
+                    new Date("2021-10-10T11:30:00"),
+                    new Date("2021-10-10T12:15:00"),
+                    new Date("2021-10-10T13:00:00"),
+                    new Date("2021-10-10T23:45:00"),
+                ],
                 id: 1,
             },
             {
                 name: "Queen",
                 price: 20000,
+                availableTimes: [
+                    new Date("2021-10-10T10:00:00"),
+                    new Date("2021-10-10T11:00:00"),
+                ],
                 id: 2,
             },
             {
                 name: "Prince",
                 price: 30000,
+                availableTimes: [
+                    new Date("2021-10-10T10:00:00"),
+                    new Date("2021-10-10T11:00:00"),
+                    new Date("2021-10-10T12:00:00"),
+                ],
                 id: 3,
             },
         ],
@@ -38,15 +54,28 @@ const hotels = [
                 name: "Princess",
                 price: 10000,
                 id: 1,
+                availableTimes: [
+                    new Date("2021-10-10T8:00:00"),
+                    new Date("2021-10-10T9:00:00"),
+                ],
             },
             {
                 name: "Monarch",
                 price: 20000,
+                availableTimes: [
+                    new Date("2021-10-10T8:00:00"),
+                    new Date("2021-10-10T9:00:00"),
+                    new Date("2021-10-10T10:00:00"),
+                ],
                 id: 2,
             },
             {
                 name: "Poor Peasant",
                 price: 30000,
+                availableTimes: [
+                    new Date("2021-10-10T8:00:00"),
+                    new Date("2021-10-10T9:00:00"),
+                ],
                 id: 3,
             },
         ],
@@ -63,16 +92,31 @@ const hotels = [
             {
                 name: "Trev",
                 price: 10000,
+                availableTimes: [
+                    new Date("2021-10-10T8:00:00"),
+                    new Date("2021-10-10T9:00:00"),
+                ],
                 id: 1,
             },
             {
                 name: "Kill",
                 price: 20000,
+                availableTimes: [
+                    new Date("2021-10-10T8:00:00"),
+                    new Date("2021-10-10T9:00:00"),
+                    new Date("2021-10-10T10:00:00"),
+                ],
                 id: 2,
             },
             {
                 name: "Me",
                 price: 30000,
+                availableTimes: [
+                    new Date("2021-10-10T8:00:00"),
+                    new Date("2021-10-10T9:00:00"),
+                    new Date("2021-10-10T10:00:00"),
+                    new Date("2021-10-10T11:00:00"),
+                ],
                 id: 3,
             },
         ],

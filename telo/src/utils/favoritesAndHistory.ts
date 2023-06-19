@@ -21,10 +21,10 @@ const getFavorites = () => {
     return getSessionUser()?.favoritesById;
 };
 
-const setHistory = (hotelId: number, roomId: number) => {
+const setHistory = (hotelId: number, roomId: number, roomTime: Date) => {
     const user = getSessionUser();
     if (user) {
-        user.historyById?.push({ hotelId, roomId });
+        user.historyById?.push({ hotelId, roomId, roomTime });
         localStorage.setItem("sessionUser", JSON.stringify(user));
         localStorage.setItem(user.email, JSON.stringify(user));
     }
@@ -34,16 +34,24 @@ const getHistory = () => {
     return getSessionUser()?.historyById;
 };
 
-const addCurrentReservation = (hotelId: number, roomId: number) => {
+const addCurrentReservation = (
+    hotelId: number,
+    roomId: number,
+    roomTime: Date
+) => {
     const user = getSessionUser();
     if (user) {
-        user.currentReservationsById?.push({ hotelId, roomId });
+        user.currentReservationsById?.push({ hotelId, roomId, roomTime });
         localStorage.setItem("sessionUser", JSON.stringify(user));
         localStorage.setItem(user.email, JSON.stringify(user));
     }
 };
 
-const expireCurrentReservation = (hotelId: number, roomId: number) => {
+const expireCurrentReservation = (
+    hotelId: number,
+    roomId: number,
+    roomTime: Date
+) => {
     const user = getSessionUser();
     if (user) {
         user.currentReservationsById = user.currentReservationsById?.filter(
@@ -51,7 +59,7 @@ const expireCurrentReservation = (hotelId: number, roomId: number) => {
         );
         localStorage.setItem("sessionUser", JSON.stringify(user));
         localStorage.setItem(user.email, JSON.stringify(user));
-        setHistory(hotelId, roomId);
+        setHistory(hotelId, roomId, roomTime);
     }
 };
 
