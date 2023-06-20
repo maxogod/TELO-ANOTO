@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState, useRef } from "react"
 import { toggleFavorite, getFavorites } from "../../utils/favoritesAndHistory"
-import QrPopUp from "../utils/PopUp"
+import { removeCurrentReservation } from '../../utils/favoritesAndHistory';
+import { QrPopUp, CancelPopUp } from "../utils/PopUp"
 import { hotels } from "../../utils/mockData"
-
+import { hotelAndRoom } from "../../utils/authHandling"
 import heart from '../../assets/icons/heart.svg'
 import heartFill from '../../assets/icons/heartFill.svg'
 import carIcon from '../../assets/icons/carIcon.svg'
@@ -12,7 +13,7 @@ import locationPin from '../../assets/icons/locationPin.svg'
 import qrCode from '../../assets/icons/qrCode.png'
 import mapThumbNail from '../../assets/icons/mapThumbNail.svg'
 import cancel from '../../assets/icons/cancel.svg'
-import { hotelAndRoom } from "../../utils/authHandling"
+
 
 
 interface Hotel {
@@ -23,6 +24,7 @@ interface Hotel {
     stars: number,
     parkingLot: boolean,
     availableRooms: Array<Room>,
+    placeUrl: string
 }
 
 interface Room {
@@ -118,8 +120,9 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
     )
 }
 
-const HotelThumbNail = ({ hotelAndRoom, onRemove, isExpired }: { hotelAndRoom: hotelAndRoom, onRemove: () => void, isExpired: boolean }) => {
+const HotelThumbNail = ({ hotelAndRoom, isExpired }: { hotelAndRoom: hotelAndRoom, isExpired: boolean }) => {
 
+    const [showQrPopUp, setShowQrPopUp] = useState(false);
     const hotel = hotels.find(h => h.id === hotelAndRoom.roomId)
     const room = hotel?.availableRooms.find(r => r.id === hotelAndRoom.roomId)
     const date = new Date(hotelAndRoom.roomTime)
@@ -127,10 +130,24 @@ const HotelThumbNail = ({ hotelAndRoom, onRemove, isExpired }: { hotelAndRoom: h
     const titleAndLocation = `${hotel?.name} - ${hotel?.location}`;
     const dateTime = `${date.getDay().toString()}/${date.getMonth().toString()} - ${date.toString().slice(16, 21)}`
 
-    const [showPopUp, setShowPopUp] = useState(false);
+    const icons = [
+        { image: mapThumbNail, function: () => hotel?.placeUrl && openURL({ url: hotel.placeUrl }) },
+        { image: cancel, function: () => hotel?.id && room?.id && removeReservation({hotelId: hotel.id, roomId: room.id}) },
+        { image: heart }
+    ];
+
+
+    const removeReservation = ({hotelId, roomId} : {hotelId: number, roomId: number}) => {
+        removeCurrentReservation(hotelId, roomId)
+        window.location.reload();
+    }
+
+    const openURL = ({ url }: { url: string }) => {
+        window.open(url, '_blank');
+    };
 
     const handleQrCodeClick = () => {
-        setShowPopUp(true)
+        setShowQrPopUp(true)
     }
 
     return (
@@ -145,11 +162,15 @@ const HotelThumbNail = ({ hotelAndRoom, onRemove, isExpired }: { hotelAndRoom: h
                         <h2 className="text-gray-700 font-bold overflow-hidden whitespace-nowrap">
                             {dateTime}
                         </h2>
-                        <div className="flex  mt-[1px]  space-x-3 ">
-                        <img src={mapThumbNail} className='w-8 h-8 ' alt="" />
-                        <img src={cancel} className='w-8 h-8 ' alt="" />
-                        <img src={heart} className=' w-8 h-8 invert ' alt="" />
-                    </div>
+                        <div className="flex  mt-1  space-x-3 ">
+                            {icons.map((icon, index) => (
+                                icon.image !== cancel || !isExpired ? (
+                                    <div className="w-8 h-8 cursor-pointer" key={index} onClick={icon.function}>
+                                        <img src={icon.image} className={icon.image === heart ? 'invert' : ''} alt="" />
+                                    </div>
+                                ) : null
+                            ))}
+                        </div>
                     </div>
                     <div
                         className={` ${isExpired ? 'bg-gray-300' : 'bg-reservationPurple'} w-20 h-20 absolute right-0 rounded-3xl flex justify-center items-center`}
@@ -159,7 +180,7 @@ const HotelThumbNail = ({ hotelAndRoom, onRemove, isExpired }: { hotelAndRoom: h
                     </div>
                 </div>
             </div>
-            {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room} dateTime={dateTime} onRemove={onRemove} />}
+            {showQrPopUp && <QrPopUp setShowPopUp={setShowQrPopUp} hotel={hotel as Hotel} room={room as Room} dateTime={hotelAndRoom.roomTime} />}
         </div>
     )
 }
