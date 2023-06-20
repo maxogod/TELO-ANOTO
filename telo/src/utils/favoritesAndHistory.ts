@@ -21,6 +21,16 @@ const getFavorites = () => {
     return getSessionUser()?.favoritesById;
 };
 
+function isFavorite({ hotelId }: { hotelId: number }): boolean {
+    const existingUser = localStorage.getItem("sessionUser");
+    if (existingUser) {
+      const currentUser = JSON.parse(existingUser);
+      return !!currentUser.favoritesById?.includes(hotelId);
+    }
+    return false;
+  }
+
+
 const setHistory = (hotelId: number, roomId: number, roomTime: Date) => {
     const user = getSessionUser();
     if (user) {
@@ -90,4 +100,5 @@ export {
     expireCurrentReservation,
     removeCurrentReservation,
     getCurrentReservations,
+    isFavorite
 };

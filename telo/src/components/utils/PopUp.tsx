@@ -15,7 +15,6 @@ const QrPopUp = ({setShowPopUp, hotel, room, dateTime}: {setShowPopUp: React.Dis
   const handleExpireCurrentReservation = () => {
     expireCurrentReservation(hotel.id, room.id, dateTime)
     setShowPopUp(false)
-    window.location.reload();
   };
 
     return (

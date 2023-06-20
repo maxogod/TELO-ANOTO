@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState, useRef } from "react"
-import { toggleFavorite, getFavorites } from "../../utils/favoritesAndHistory"
-import { removeCurrentReservation } from '../../utils/favoritesAndHistory';
+import { toggleFavorite, getFavorites, removeCurrentReservation, isFavorite} from "../../utils/favoritesAndHistory"
 import { QrPopUp, CancelPopUp } from "../utils/PopUp"
 import { hotels } from "../../utils/mockData"
 import { hotelAndRoom } from "../../utils/authHandling"
@@ -132,14 +131,17 @@ const HotelThumbNail = ({ hotelAndRoom, isExpired }: { hotelAndRoom: hotelAndRoo
 
     const icons = [
         { image: mapThumbNail, function: () => hotel?.placeUrl && openURL({ url: hotel.placeUrl }) },
-        { image: cancel, function: () => hotel?.id && room?.id && removeReservation({hotelId: hotel.id, roomId: room.id}) },
-        { image: heart }
+        { image: cancel, function: () => hotel?.id && room?.id && removeReservation({ hotelId: hotel.id, roomId: room.id }) },
+        { image: heart, function: () => hotel?.id && addFavorites({ hotelId: hotel.id }) }
     ];
 
 
-    const removeReservation = ({hotelId, roomId} : {hotelId: number, roomId: number}) => {
+    const removeReservation = ({ hotelId, roomId }: { hotelId: number, roomId: number }) => {
         removeCurrentReservation(hotelId, roomId)
-        window.location.reload();
+    }
+
+    const addFavorites = ({ hotelId }: { hotelId: number }) => {
+        toggleFavorite(hotelId)
     }
 
     const openURL = ({ url }: { url: string }) => {
@@ -166,7 +168,11 @@ const HotelThumbNail = ({ hotelAndRoom, isExpired }: { hotelAndRoom: hotelAndRoo
                             {icons.map((icon, index) => (
                                 icon.image !== cancel || !isExpired ? (
                                     <div className="w-8 h-8 cursor-pointer" key={index} onClick={icon.function}>
-                                        <img src={icon.image} className={icon.image === heart ? 'invert' : ''} alt="" />
+                                        { icon.image === heart && isFavorite({ hotelId: hotel?.id ?? 0 }) ? (
+                                            <img src={heartFill} className="invert" alt="" />
+                                        ) : (
+                                            <img src={icon.image} className={icon.image === heart ? 'invert' : ''} alt="" />
+                                        )}
                                     </div>
                                 ) : null
                             ))}

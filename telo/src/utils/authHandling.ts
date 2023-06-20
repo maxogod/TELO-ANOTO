@@ -65,6 +65,7 @@ function updateUser(userInfo: {
     return null;
 }
 
+
 function getSessionUser() {
     const existingUser = localStorage.getItem("sessionUser");
     if (existingUser) {

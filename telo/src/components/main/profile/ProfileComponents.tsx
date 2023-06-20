@@ -6,17 +6,10 @@ import { hotelAndRoom } from "../../../utils/authHandling"
 
 const ListComponent = ({ name, hotels, isExpired }: { name: string, hotels: hotelAndRoom[], isExpired: boolean }) => {
   const [expanded, setExpanded] = useState(false)
-  const [reservations, setReservations] = useState(hotels)
 
   const handleExpand = () => {
     setExpanded(!expanded)
   };
-
-  useEffect(() => {
-    setReservations(hotels);
-    console.log("update hotels");
-  }, [reservations])
-
   return (
     <div className={`relative ${expanded ? 'h-fit' : 'h-7'} w-80 rounded-xl overflow-hidden  transition-all duration-700`}>
       <div className='bg-teloBlack bg-opacity-70 flex flex-col'>
@@ -27,7 +20,7 @@ const ListComponent = ({ name, hotels, isExpired }: { name: string, hotels: hote
           </div>
         </div>
         <div>
-          {reservations.map((reservation, index) => (
+          {hotels.map((reservation, index) => (
             <div key={index}>
               <HotelThumbNail hotelAndRoom={reservation} isExpired={isExpired} />
             </div>
@@ -53,9 +46,5 @@ const Reservations = ({ currentReservations }: { currentReservations: hotelAndRo
   );
 };
 
-const Favorites = () => {
 
-  return
-}
-
-export { Reservations, History }
+export { Reservations, History}

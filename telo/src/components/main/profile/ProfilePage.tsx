@@ -1,8 +1,7 @@
-import { useEffect } from "react"
-
+import { useEffect, useState } from "react"
 import { Reservations, History } from './ProfileComponents'
-import { getSessionUser } from "../../../utils/authHandling"
 import { hotelAndRoom } from "../../../utils/authHandling"
+import { getSessionUser } from "../../../utils/authHandling"
 import ProfileCard from "./ProfileCard"
 import AnimatedPage from "../../animations/AnimatedPage"
 import NavBar from "../../utils/NavBar"
@@ -17,25 +16,27 @@ const ProfilePage = () => {
 
     const user = getSessionUser()
 
+    const [currentReservations, setCurrentReservations] = useState<hotelAndRoom[] | undefined>(user?.currentReservationsById);
+    const [currentHistory, setCurrentHistory] = useState<hotelAndRoom[]  | undefined>(user?.historyById);
+
     useEffect(() => {
-        console.log("cambio");
+        setCurrentReservations(user?.currentReservationsById)
+       setCurrentHistory(user?.historyById)
     }, [user?.currentReservationsById, user?.historyById, user?.favoritesById]);
 
 
     return (
         <>
-            <NavBar opacity={95}/>
-            <div>
-                <AnimatedPage animation={animation}>
-                    <div className="relative pb-14 overflow-y-scroll">
-                        <div className='flex flex-col items-center justify-center gap-3 mt-16'>
-                            <ProfileCard />
-                            <Reservations currentReservations={user?.currentReservationsById as hotelAndRoom[]} />
-                            <History history={user?.historyById as hotelAndRoom[]} />
-                        </div>
+            <NavBar opacity={80} />
+            <AnimatedPage animation={animation}>
+                <div>
+                    <div className='flex flex-col items-center justify-center gap-3 mt-16'>
+                        <ProfileCard/>
+                        <Reservations currentReservations={currentReservations as hotelAndRoom[]}/>
+                        <History history={currentHistory as hotelAndRoom[]} />
                     </div>
-                </AnimatedPage>
-            </div>
+                </div>
+            </AnimatedPage>
         </>
     );
 };
