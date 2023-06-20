@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import expand_down from '../../../assets/icons/expand_down.svg';
+import { expireCurrentReservation } from '../../../utils/favoritesAndHistory';
 import { HotelThumbNail } from '../../hotel/HotelCard';
 import { hotelAndRoom } from "../../../utils/authHandling"
 
@@ -8,17 +9,16 @@ import { hotelAndRoom } from "../../../utils/authHandling"
 const ListComponent = ({ name, hotels, isExpired }: { name: string, hotels: hotelAndRoom[], isExpired: boolean }) => {
   const [expanded, setExpanded] = useState(false)
   const [reservations, setReservations] = useState(hotels)
+  
 
   const handleExpand = () => {
     setExpanded(!expanded)
   };
 
 
-  const removeReservation = (index: number) => {
-    const updatedReservations = [...reservations]
-    updatedReservations.splice(index, 1)
-    setReservations(updatedReservations)
-    location.reload();
+  const removeReservation = (reservation: hotelAndRoom) => {
+    expireCurrentReservation(reservation.hotelId, reservation.roomId, reservation.roomTime)
+    setReservations(hotels)
   };
 
 
@@ -34,7 +34,7 @@ const ListComponent = ({ name, hotels, isExpired }: { name: string, hotels: hote
         <div>
           {reservations.map((reservation, index) => (
             <div key={index}>
-              <HotelThumbNail hotelId={reservation.hotelId} roomId={reservation.roomId} onRemove={() => removeReservation(index)} isExpired={isExpired} />
+              <HotelThumbNail hotelAndRoom={reservation} onRemove={() => removeReservation(reservation)} isExpired={isExpired} />
             </div>
           ))}
         </div>

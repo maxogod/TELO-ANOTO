@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState, useRef } from "react"
-
 import { toggleFavorite, getFavorites } from "../../utils/favoritesAndHistory"
 import QrPopUp from "../utils/PopUp"
 import { hotels } from "../../utils/mockData"
@@ -13,7 +12,7 @@ import locationPin from '../../assets/icons/locationPin.svg'
 import qrCode from '../../assets/icons/qrCode.png'
 import mapThumbNail from '../../assets/icons/mapThumbNail.svg'
 import cancel from '../../assets/icons/cancel.svg'
-
+import { hotelAndRoom } from "../../utils/authHandling"
 
 
 interface Hotel {
@@ -27,9 +26,10 @@ interface Hotel {
 }
 
 interface Room {
+    id: number,
     name: string,
     price: number,
-    id: number,
+    availableTimes: Date[],
 }
 
 const titleCarousel = [
@@ -118,10 +118,14 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
     )
 }
 
-const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: number, roomId: number, onRemove: () => void, isExpired: boolean }) => {
+const HotelThumbNail = ({ hotelAndRoom, onRemove, isExpired }: { hotelAndRoom: hotelAndRoom, onRemove: () => void, isExpired: boolean }) => {
 
-    const hotel = hotels.find(h => h.id === hotelId)
-    const room = hotel?.availableRooms.find(r => r.id === roomId)
+    const hotel = hotels.find(h => h.id === hotelAndRoom.roomId)
+    const room = hotel?.availableRooms.find(r => r.id === hotelAndRoom.roomId)
+    const date = new Date(hotelAndRoom.roomTime)
+
+    const titleAndLocation = `${hotel?.name} - ${hotel?.location}`;
+    const dateTime = `${date.getDay().toString()}/${date.getMonth().toString()} - ${date.toString().slice(16, 21)}`
 
     const [showPopUp, setShowPopUp] = useState(false);
 
@@ -134,14 +138,18 @@ const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: num
             <div className='bg-white  w-80 h-20 mt-2 mb-1 rounded-3xl relative '>
                 <div className='flex'>
                     <img src={hotel?.picture} className='w-20 h-20 object-fill rounded-3xl' alt="" />
-                    <div className="pl-2">
-                        <h1 className="text-black font-bold">{hotel?.name} - {hotel?.location}</h1>
-                        <h2 className="text-gray-700 font-bold">{room?.name} - ${room?.price}</h2 >
+                    <div className="pl-2  mt-0 text-sm">
+                        <h1 className="text-black font-bold overflow-hidden whitespace-nowrap">
+                            {titleAndLocation && titleAndLocation.length > 18 ? `${titleAndLocation.slice(0, 18)}...` : titleAndLocation}
+                        </h1>
+                        <h2 className="text-gray-700 font-bold overflow-hidden whitespace-nowrap">
+                            {dateTime}
+                        </h2>
                         <div className="flex  mt-[1px]  space-x-3 ">
-                            <img src={mapThumbNail} className='w-5 h-5 ' alt="" />
-                            <img src={cancel} className='w-5 h-5 ' alt="" />
-                            <img src={heart} className=' w-5 h-5 invert ' alt="" />
-                        </div>
+                        <img src={mapThumbNail} className='w-8 h-8 ' alt="" />
+                        <img src={cancel} className='w-8 h-8 ' alt="" />
+                        <img src={heart} className=' w-8 h-8 invert ' alt="" />
+                    </div>
                     </div>
                     <div
                         className={` ${isExpired ? 'bg-gray-300' : 'bg-reservationPurple'} w-20 h-20 absolute right-0 rounded-3xl flex justify-center items-center`}
@@ -151,7 +159,7 @@ const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: num
                     </div>
                 </div>
             </div>
-            {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room} onRemove={onRemove} />}
+            {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room} dateTime={dateTime} onRemove={onRemove} />}
         </div>
     )
 }
@@ -170,3 +178,4 @@ function getStarObjects(numOfStars: number) {
 }
 
 export { HotelCard, HotelThumbNail }
+export type { Hotel, Room }

@@ -1,25 +1,11 @@
 
 import defaultQrCode from '../../assets/defaultQrCode.svg'
 import { expireCurrentReservation } from '../../utils/favoritesAndHistory';
+import { Hotel, Room } from '../hotel/HotelCard'
 import close from '../../assets/icons/cancel.svg'
 
-interface Hotel {
-  id: number,
-  name: string,
-  location: string,
-  picture: string,
-  stars: number,
-  parkingLot: boolean,
-  availableRooms: Array<Room>,
-}
 
-interface Room {
-  name: string,
-  price: number,
-  id: number,
-}
-
-const QrPopUp = ({setShowPopUp, hotel, room, onRemove}: {setShowPopUp: React.Dispatch<React.SetStateAction<boolean>>, hotel: Hotel, room: Room, onRemove: () => void }) => {
+const QrPopUp = ({setShowPopUp, hotel, room, dateTime, onRemove}: {setShowPopUp: React.Dispatch<React.SetStateAction<boolean>>, hotel: Hotel, room: Room, dateTime: string, onRemove: () => void }) => {
 
 
   const handleClosePopUp = () => {
@@ -27,9 +13,9 @@ const QrPopUp = ({setShowPopUp, hotel, room, onRemove}: {setShowPopUp: React.Dis
   };
 
   const handleExpireCurrentReservation = () => {
-    expireCurrentReservation(hotel.id, room.id)
+    
     setShowPopUp(false)
-    onRemove(); // Call the callback function to handle removal
+    onRemove();
   };
 
     return (
@@ -47,7 +33,7 @@ const QrPopUp = ({setShowPopUp, hotel, room, onRemove}: {setShowPopUp: React.Dis
                 <h1 className="text-xl font-bold">{hotel.name}</h1>
                 <h2 className="text-xl font-bold">{hotel.location}</h2>
                 <h3>{room.name} - ${room.price}</h3>
-                <h3>room date and time</h3>
+                <h3>{dateTime}</h3>
                 <img src={defaultQrCode} alt={defaultQrCode} className='w-52 h-52 ' onClick={handleExpireCurrentReservation}/>
             </div>
           </div>
