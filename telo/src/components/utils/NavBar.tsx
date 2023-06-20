@@ -16,7 +16,7 @@ const NavBar = ({ opacity }: { opacity: number }) => {
   return (
     <nav className={`z-10 bg-navBarPurple opacity-${opacity} fixed bottom-0 w-screen flex justify-around py-1 rounded-tl-2xl rounded-tr-2xl`}>
       {sections.map((section) => {
-        const isActive = location.hash === section.url;
+        const isActive = location.hash ? (location.hash === section.url) : ('#/' === section.url);
         return (
           <Link to={section.to} key={section.id} className=" transition-transform flex flex-col items-center text-gray-300">
             <img

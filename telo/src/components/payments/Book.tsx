@@ -28,6 +28,8 @@ const Book = () => {
         setPaymentMethod(e.target.value)
     }
 
+    console.log(room?.availableTimes)
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const selectedTime = new Date((e.currentTarget.elements.namedItem('selectedTime') as HTMLInputElement).value);
