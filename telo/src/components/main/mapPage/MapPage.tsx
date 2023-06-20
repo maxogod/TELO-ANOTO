@@ -10,7 +10,7 @@ const animation = {
 const MapPage = () => {
     return (
         <>
-            <NavBar opacity={80} />
+            <NavBar opacity={95} />
             <AnimatedPage animation={animation}>
                 <div className="flex items-center justify-center opacity-95">
                     <h1 className="text-white text-xl">ATHUSS</h1>

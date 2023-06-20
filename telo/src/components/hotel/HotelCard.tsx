@@ -83,8 +83,7 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
 
     return (
         <div
-            className="flex flex-col gap-2 justify-center items-center"
-            style={{ height: '60vh' }}
+            className="flex flex-col gap-2 justify-center items-center h-[60vh] card"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
@@ -92,11 +91,14 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
             <div className="bg-white opacity-90 w-80 border rounded-4xl">
                 <div id="image" className="relative">
                     <button onClick={handleToggleFavorite} className="absolute top-3 right-3 text-white hover:animate-wiggle"><img src={favorite ? heartFill : heart} alt="favorite" /></button>
-                    <img className="rounded-t-4xl object-cover" style={{ height: '26rem' }} src={hotel.picture} alt="hotel pic" />
+                    <img
+                        className="rounded-t-4xl object-cover h-[40vh] w-full"
+                        src={hotel.picture}
+                        alt="hotel pic" />
                     <h1 className="absolute bottom-20 left-2 text-white text-2xl font-bold">{hotel.name}</h1>
                     <img className='absolute bottom-16 h-5 left-2 text-white' src={locationPin} alt="" />
                     <p className="absolute bottom-16 scale-90 left-6 text-white">{hotel.location}</p>
-                    <div className="bg-slate-100 rounded-4xl flex flex-col absolute -ml-[1px] w-80 h-56 -bottom-40 overflow-y-scroll overflow-x-hidden p-3">
+                    <div className="card-info bg-slate-100 rounded-4xl flex flex-col absolute -ml-[1px] w-80 h-56 -bottom-40 overflow-y-scroll overflow-x-hidden p-3">
                         {hotel.parkingLot && <img className='absolute right-4 top-4' src={carIcon} alt="parking lot" />}
                         <div id='stars' className='flex pl-2 mb-4 mt-3'>
                             {stars.map((star, index) => (
@@ -118,7 +120,7 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
     )
 }
 
-const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: number, roomId: number, onRemove: () => void, isExpired: boolean}) => {
+const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: number, roomId: number, onRemove: () => void, isExpired: boolean }) => {
 
     const hotel = hotels.find(h => h.id === hotelId)
     const room = hotel?.availableRooms.find(r => r.id === roomId)
@@ -144,12 +146,12 @@ const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: num
                         <img src={heart} className='w-5 h-5 invert ' alt="" />
                     </div>
                 </div>
-                    <div
-                        className={`absolute ${isExpired ? 'bg-gray-300' : 'bg-reservationPurple'} w-20 h-20 right-0 rounded-3xl flex justify-center items-center`}
-                        // eslint-disable-next-line @typescript-eslint/no-empty-function
-                        onClick={isExpired ? ()=>{} : handleQrCodeClick}>
-                        <img src={qrCode} className='w-14 h-14' alt="" />
-                    </div>
+                <div
+                    className={`absolute ${isExpired ? 'bg-gray-300' : 'bg-reservationPurple'} w-20 h-20 right-0 rounded-3xl flex justify-center items-center`}
+                    // eslint-disable-next-line @typescript-eslint/no-empty-function
+                    onClick={isExpired ? () => { } : handleQrCodeClick}>
+                    <img src={qrCode} className='w-14 h-14' alt="" />
+                </div>
                 <div className='absolute bg-black w-20 h-20 left-0 rounded-3xl flex justify-center items-center'>
                     <img src={hotel?.picture} className='w-full h-full rounded-3xl' alt="" />
                 </div>
