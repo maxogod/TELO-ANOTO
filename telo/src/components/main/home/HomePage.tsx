@@ -30,7 +30,7 @@ const HomePage = ({setShowMap, currentHotelIndex, setCurrentHotelIndex }:
 
     return (
         <>
-            <NavBar opacity={80} />
+            <NavBar opacity={95} />
             <AnimatedPage animation={animation}>
                 <div>
                     <HotelCard

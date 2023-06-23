@@ -66,3 +66,13 @@ input[type="date"]::-webkit-datetime-edit {
 .hover\:animate-wiggle:hover {
     animation: wiggle 0.5s ease-in-out;
 }
+
+@media screen and (max-height: 565px) {
+    .card {
+        height: 50vh !important;
+    }
+    .card-info {
+        height: 11rem /* 176px */;
+        bottom: -7rem /* -112px */;
+    }
+}

@@ -47,9 +47,9 @@ const Login = ({ setUser }: { setUser: setUserFunction }) => {
       <BackgroundAuth />
 
       <div className="fixed inset-0  flex items-center justify-center flex-col">
-        <img src={logo} className="absolute top-10 contrast-200" alt="logo" />
+        <img src={logo} className="contrast-200 h-40" alt="logo" />
 
-        <form onSubmit={handleSubmit} className='flex flex-col items-center mt-40'>
+        <form onSubmit={handleSubmit} className='flex flex-col items-center'>
           <p className='text-white w-full text-left'>Ingrese su email y contraseña</p>
 
           {labels.map((label, index) => (
@@ -66,7 +66,7 @@ const Login = ({ setUser }: { setUser: setUserFunction }) => {
           </button>
         </form>
 
-        <button className='brightness-75 contrast-200 mt-3 mb-16' onClick={handleGoogleAuth}>
+        <button className='brightness-75 contrast-200 mt-3 mb-6' onClick={handleGoogleAuth}>
           <img src={googleIcon} alt="" />
         </button>
 
@@ -75,7 +75,7 @@ const Login = ({ setUser }: { setUser: setUserFunction }) => {
           <Link to='/signup'><p>no esta registrado? <b className='text-white'>Crear Cuenta</b></p></Link>
         </div>
 
-        <footer className='absolute bottom-1 text-gray-400 w-full ml-7'>Ide.all - 2023</footer>
+        <footer className='absolute bottom-1 text-gray-400 w-full ml-7 sm:hidden'>Ide.all - 2023</footer>
       </div>
     </>
   )

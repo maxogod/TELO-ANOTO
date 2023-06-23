@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-
 import { Reservations, History } from './ProfileComponents'
 import { getSessionUser } from "../../../utils/authHandling"
 import ProfileCard from "./ProfileCard"
@@ -18,10 +16,6 @@ const ProfilePage = ({setShowMap}: {setShowMap: Function}) => {
     setShowMap(false)
     const user = getSessionUser()
 
-    useEffect(() => {
-       console.log("cambio");
-    }, [user?.currentReservationsById, user?.historyById, user?.favoritesById]);
-
 
     return (
         <>
@@ -29,8 +23,8 @@ const ProfilePage = ({setShowMap}: {setShowMap: Function}) => {
             <AnimatedPage animation={animation}>
                 <div>
                     <div className='flex flex-col items-center justify-center gap-6 mt-16'>
-                        <ProfileCard/>
-                        <Reservations currentReservations={user?.currentReservationsById as []}/>
+                        <ProfileCard />
+                        <Reservations currentReservations={user?.currentReservationsById as []} />
                         <History history={user?.historyById as []} />
                     </div>
                 </div>

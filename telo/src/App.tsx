@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 
 import { getSessionUser } from './utils/authHandling'
 
@@ -29,8 +29,8 @@ function App() {
   })
 
   return (
-    <BrowserRouter>
-      <BackgroundMain showMap={showMap} />
+    <HashRouter>
+      <BackgroundMain showMap={showMap}  />
       <GMap/>
       <FilterBar />
       <Routes>
@@ -47,7 +47,7 @@ function App() {
         <Route path='/book/:hotel_id/:room_id' element={user ? <Book /> : <Navigate to='/login' />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

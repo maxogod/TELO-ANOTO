@@ -13,7 +13,7 @@ const MapPage = ({setShowMap}: {setShowMap: Function}) => {
     setShowMap(true)
     return (
         <>
-            <NavBar opacity={80} />
+            <NavBar opacity={95} />
             <AnimatedPage animation={animation}>
                 <div>
                    
