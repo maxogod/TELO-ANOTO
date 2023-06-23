@@ -3,6 +3,7 @@ const hotels = [
         id: 1,
         name: "Super Telo",
         location: "Narnia",
+        placeUrl: "https://www.google.com/maps/place/Hotel+Conde+Y+Olleros/@-34.5784565,-58.4503893,17z/data=!3m1!4b1!4m9!3m8!1s0x95bcb5e9c94af783:0xebc6e23a45b4d076!5m2!4m1!1i2!8m2!3d-34.5784565!4d-58.4482006!16s%2Fg%2F1hc7zqh6p?entry=ttu",
         picture:
             "https://images.trvl-media.com/lodging/93000000/92550000/92541800/92541785/e51b7021.jpg",
         stars: 3,
@@ -45,6 +46,7 @@ const hotels = [
         id: 2,
         name: "Super Telo The Sequel",
         location: "La Matanza",
+        placeUrl: "https://www.google.com/maps/place/Hotel+Conde+Y+Olleros/@-34.5784565,-58.4503893,17z/data=!3m1!4b1!4m9!3m8!1s0x95bcb5e9c94af783:0xebc6e23a45b4d076!5m2!4m1!1i2!8m2!3d-34.5784565!4d-58.4482006!16s%2Fg%2F1hc7zqh6p?entry=ttu",
         picture:
             "https://www.kayak.com/rimg/himg/4f/28/c1/leonardo-2692048-146242699-810924.jpg",
         stars: 1,
@@ -84,6 +86,7 @@ const hotels = [
         id: 3,
         name: "Bombonera",
         location: "Kill Me",
+        placeUrl: "https://www.google.com/maps/place/Hotel+Conde+Y+Olleros/@-34.5784565,-58.4503893,17z/data=!3m1!4b1!4m9!3m8!1s0x95bcb5e9c94af783:0xebc6e23a45b4d076!5m2!4m1!1i2!8m2!3d-34.5784565!4d-58.4482006!16s%2Fg%2F1hc7zqh6p?entry=ttu",
         picture:
             "https://media.gta-series.com/images/gta-5/missions/story/mr-philips-15.jpg",
         stars: 5,

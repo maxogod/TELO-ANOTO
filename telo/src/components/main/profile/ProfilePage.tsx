@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react"
 import { Reservations, History } from './ProfileComponents'
+import { hotelAndRoom } from "../../../utils/authHandling"
 import { getSessionUser } from "../../../utils/authHandling"
 import ProfileCard from "./ProfileCard"
 import AnimatedPage from "../../animations/AnimatedPage"
@@ -13,8 +15,16 @@ const animation = {
 
 const ProfilePage = ({setShowMap}: {setShowMap: Function}) => {
 
+    const [currentReservations, setCurrentReservations] = useState<hotelAndRoom[] | undefined>(user?.currentReservationsById);
+    const [currentHistory, setCurrentHistory] = useState<hotelAndRoom[]  | undefined>(user?.historyById);
+
+    useEffect(() => {
+        setCurrentReservations(user?.currentReservationsById)
+       setCurrentHistory(user?.historyById)
+    }, [user?.currentReservationsById, user?.historyById, user?.favoritesById]);
     setShowMap(false)
     const user = getSessionUser()
+
 
 
     return (
@@ -22,10 +32,10 @@ const ProfilePage = ({setShowMap}: {setShowMap: Function}) => {
             <NavBar opacity={80} />
             <AnimatedPage animation={animation}>
                 <div>
-                    <div className='flex flex-col items-center justify-center gap-6 mt-16'>
-                        <ProfileCard />
-                        <Reservations currentReservations={user?.currentReservationsById as []} />
-                        <History history={user?.historyById as []} />
+                    <div className='flex flex-col items-center justify-center gap-3 mt-16'>
+                        <ProfileCard/>
+                        <Reservations currentReservations={currentReservations as hotelAndRoom[]}/>
+                        <History history={currentHistory as hotelAndRoom[]} />
                     </div>
                 </div>
             </AnimatedPage>

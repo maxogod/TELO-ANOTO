@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState, useRef } from "react"
-
-import { toggleFavorite, getFavorites } from "../../utils/favoritesAndHistory"
-import QrPopUp from "../utils/PopUp"
+import { toggleFavorite, getFavorites, removeCurrentReservation, isFavorite} from "../../utils/favoritesAndHistory"
+import { QrPopUp, CancelPopUp } from "../utils/PopUp"
 import { hotels } from "../../utils/mockData"
-
+import { hotelAndRoom } from "../../utils/authHandling"
 import heart from '../../assets/icons/heart.svg'
 import heartFill from '../../assets/icons/heartFill.svg'
 import carIcon from '../../assets/icons/carIcon.svg'
@@ -24,12 +23,14 @@ interface Hotel {
     stars: number,
     parkingLot: boolean,
     availableRooms: Array<Room>,
+    placeUrl: string
 }
 
 interface Room {
+    id: number,
     name: string,
     price: number,
-    id: number,
+    availableTimes: Date[],
 }
 
 const titleCarousel = [
@@ -120,46 +121,81 @@ const HotelCard = ({ hotel, handleNextHotel, handlePrevHotel }:
     )
 }
 
-const HotelThumbNail = ({ hotelId, roomId, onRemove, isExpired }: { hotelId: number, roomId: number, onRemove: () => void, isExpired: boolean }) => {
+const HotelThumbNail = ({ hotelAndRoom, isExpired }: { hotelAndRoom: hotelAndRoom, isExpired: boolean }) => {
 
-    const hotel = hotels.find(h => h.id === hotelId)
-    const room = hotel?.availableRooms.find(r => r.id === roomId)
+    const [showQrPopUp, setShowQrPopUp] = useState(false);
+    const hotel = hotels.find(h => h.id === hotelAndRoom.roomId)
+    const room = hotel?.availableRooms.find(r => r.id === hotelAndRoom.roomId)
+    const date = new Date(hotelAndRoom.roomTime)
 
-    const [showPopUp, setShowPopUp] = useState(false);
+    const titleAndLocation = `${hotel?.name} - ${hotel?.location}`;
+    const dateTime = `${date.getDay().toString()}/${date.getMonth().toString()} - ${date.toString().slice(16, 21)}`
+
+    const icons = [
+        { image: mapThumbNail, function: () => hotel?.placeUrl && openURL({ url: hotel.placeUrl }) },
+        { image: cancel, function: () => hotel?.id && room?.id && removeReservation({ hotelId: hotel.id, roomId: room.id }) },
+        { image: heart, function: () => hotel?.id && addFavorites({ hotelId: hotel.id }) }
+    ];
+
+
+    const removeReservation = ({ hotelId, roomId }: { hotelId: number, roomId: number }) => {
+        removeCurrentReservation(hotelId, roomId)
+    }
+
+    const addFavorites = ({ hotelId }: { hotelId: number }) => {
+        toggleFavorite(hotelId)
+    }
+
+    const openURL = ({ url }: { url: string }) => {
+        window.open(url, '_blank');
+    };
 
     const handleQrCodeClick = () => {
-        setShowPopUp(true)
+        setShowQrPopUp(true)
     }
 
     return (
         <div>
-            <div className='bg-white  w-80 h-20 mt-2 mb-1 rounded-3xl '>
-
-
-                <div className=" absolute mt-1 left-20 pl-1  flex flex-col text-[12px]">
-                    <h1 className="text-black font-bold">{hotel?.name} - {hotel?.location}</h1>
-                    <h2 className="text-gray-700 font-bold">{room?.name} - ${room?.price}</h2 >
-                    <h3 className="text-gray-700 text-[10px]">FALTA ROOM DATE</h3>
-                    <div className="flex  mt-[1px]  space-x-3 ">
-                        <img src={mapThumbNail} className='w-5 h-5 ' alt="" />
-                        <img src={cancel} className='w-5 h-5 ' alt="" />
-                        <img src={heart} className='w-5 h-5 invert ' alt="" />
+            <div className='bg-white  w-80 h-20 mt-2 mb-1 rounded-3xl relative '>
+                <div className='flex'>
+                    <img src={hotel?.picture} className='w-20 h-20 object-fill rounded-3xl' alt="" />
+                    <div className="pl-2  mt-0 text-sm">
+                        <h1 className="text-black font-bold overflow-hidden whitespace-nowrap">
+                            {titleAndLocation && titleAndLocation.length > 18 ? `${titleAndLocation.slice(0, 18)}...` : titleAndLocation}
+                        </h1>
+                        <h2 className="text-gray-700 font-bold overflow-hidden whitespace-nowrap">
+                            {dateTime}
+                        </h2>
+                        <div className="flex  mt-1  space-x-3 ">
+                            {icons.map((icon, index) => (
+                                icon.image !== cancel || !isExpired ? (
+                                    <div className="w-8 h-8 cursor-pointer" key={index} onClick={icon.function}>
+                                        { icon.image === heart && isFavorite({ hotelId: hotel?.id ?? 0 }) ? (
+                                            <img src={heartFill} className="invert" alt="" />
+                                        ) : (
+                                            <img src={icon.image} className={icon.image === heart ? 'invert' : ''} alt="" />
+                                        )}
+                                    </div>
+                                ) : null
+                            ))}
+                        </div>
+                    </div>
+                    <div
+                        className={` ${isExpired ? 'bg-gray-300' : 'bg-reservationPurple'} w-20 h-20 absolute right-0 rounded-3xl flex justify-center items-center`}
+                        // eslint-disable-next-line @typescript-eslint/no-empty-function
+                        onClick={isExpired ? () => { } : handleQrCodeClick}>
+                        <img src={qrCode} className='w-14 h-14' alt="" />
                     </div>
                 </div>
-                <div
-                    className={`absolute ${isExpired ? 'bg-gray-300' : 'bg-reservationPurple'} w-20 h-20 right-0 rounded-3xl flex justify-center items-center`}
-                    // eslint-disable-next-line @typescript-eslint/no-empty-function
-                    onClick={isExpired ? () => { } : handleQrCodeClick}>
-                    <img src={qrCode} className='w-14 h-14' alt="" />
-                </div>
-                <div className='absolute bg-black w-20 h-20 left-0 rounded-3xl flex justify-center items-center'>
-                    <img src={hotel?.picture} className='w-full h-full rounded-3xl' alt="" />
-                </div>
             </div>
-            {showPopUp && <QrPopUp setShowPopUp={setShowPopUp} hotel={hotel as Hotel} room={room as Room} onRemove={onRemove} />}
+            {showQrPopUp && <QrPopUp setShowPopUp={setShowQrPopUp} hotel={hotel as Hotel} room={room as Room} dateTime={hotelAndRoom.roomTime} />}
         </div>
     )
 }
+
+
+
+
 
 function getStarObjects(numOfStars: number) {
     const stars = []
@@ -171,3 +207,4 @@ function getStarObjects(numOfStars: number) {
 }
 
 export { HotelCard, HotelThumbNail }
+export type { Hotel, Room }

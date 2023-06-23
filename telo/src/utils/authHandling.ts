@@ -65,6 +65,7 @@ function updateUser(userInfo: {
     return null;
 }
 
+
 function getSessionUser() {
     const existingUser = localStorage.getItem("sessionUser");
     if (existingUser) {
@@ -73,4 +74,5 @@ function getSessionUser() {
     return null;
 }
 
-export { logInUser, registerUser, getSessionUser, updateUser };
+export { logInUser, registerUser, getSessionUser, updateUser }
+export type { hotelAndRoom, User };
