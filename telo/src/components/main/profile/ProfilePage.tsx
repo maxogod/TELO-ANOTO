@@ -12,9 +12,8 @@ const animation = {
     exit: { opacity: 0, x: 100 },
 }
 
-const ProfilePage = () => {
 
-    const user = getSessionUser()
+const ProfilePage = ({setShowMap}: {setShowMap: Function}) => {
 
     const [currentReservations, setCurrentReservations] = useState<hotelAndRoom[] | undefined>(user?.currentReservationsById);
     const [currentHistory, setCurrentHistory] = useState<hotelAndRoom[]  | undefined>(user?.historyById);
@@ -23,6 +22,9 @@ const ProfilePage = () => {
         setCurrentReservations(user?.currentReservationsById)
        setCurrentHistory(user?.historyById)
     }, [user?.currentReservationsById, user?.historyById, user?.favoritesById]);
+    setShowMap(false)
+    const user = getSessionUser()
+
 
 
     return (
