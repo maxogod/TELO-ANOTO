@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import expand_down from '../../../assets/icons/expand_down.svg';
 import { HotelThumbNail } from '../../hotel/HotelCard';
 import { hotelAndRoom } from "../../../utils/authHandling"

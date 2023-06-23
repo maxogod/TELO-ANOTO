@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState, useRef } from "react"
 import { toggleFavorite, getFavorites, removeCurrentReservation, isFavorite} from "../../utils/favoritesAndHistory"
-import { QrPopUp, CancelPopUp } from "../utils/PopUp"
+import { QrPopUp } from "../utils/PopUp"
 import { hotels } from "../../utils/mockData"
 import { hotelAndRoom } from "../../utils/authHandling"
 import heart from '../../assets/icons/heart.svg'
