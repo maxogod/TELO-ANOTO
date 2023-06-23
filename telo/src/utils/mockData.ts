@@ -1,8 +1,8 @@
 const hotels = [
     {
         id: 1,
-        name: "Super Telo",
-        location: "Narnia",
+        name: "Hotel Mitre Suite",
+        location: "Almagro",
         placeUrl: "https://www.google.com/maps/place/Hotel+Conde+Y+Olleros/@-34.5784565,-58.4503893,17z/data=!3m1!4b1!4m9!3m8!1s0x95bcb5e9c94af783:0xebc6e23a45b4d076!5m2!4m1!1i2!8m2!3d-34.5784565!4d-58.4482006!16s%2Fg%2F1hc7zqh6p?entry=ttu",
         picture:
             "https://images.trvl-media.com/lodging/93000000/92550000/92541800/92541785/e51b7021.jpg",
@@ -44,16 +44,16 @@ const hotels = [
     },
     {
         id: 2,
-        name: "Super Telo The Sequel",
-        location: "La Matanza",
+        name: "Danza Suite",
+        location: "Colegiales",
         placeUrl: "https://www.google.com/maps/place/Hotel+Conde+Y+Olleros/@-34.5784565,-58.4503893,17z/data=!3m1!4b1!4m9!3m8!1s0x95bcb5e9c94af783:0xebc6e23a45b4d076!5m2!4m1!1i2!8m2!3d-34.5784565!4d-58.4482006!16s%2Fg%2F1hc7zqh6p?entry=ttu",
         picture:
             "https://www.kayak.com/rimg/himg/4f/28/c1/leonardo-2692048-146242699-810924.jpg",
-        stars: 1,
+        stars: 5,
         parkingLot: false,
         availableRooms: [
             {
-                name: "Princess",
+                name: "Super",
                 price: 10000,
                 id: 1,
                 availableTimes: [
@@ -62,7 +62,7 @@ const hotels = [
                 ],
             },
             {
-                name: "Monarch",
+                name: "Epico",
                 price: 20000,
                 availableTimes: [
                     new Date("2021-10-10T08:00:00"),
@@ -72,7 +72,7 @@ const hotels = [
                 id: 2,
             },
             {
-                name: "Poor Peasant",
+                name: "Jacuzzi",
                 price: 30000,
                 availableTimes: [
                     new Date("2021-10-10T08:00:00"),
@@ -84,16 +84,16 @@ const hotels = [
     },
     {
         id: 3,
-        name: "Bombonera",
-        location: "Kill Me",
+        name: "Alvear Palace Hotel",
+        location: "Recoleta",
         placeUrl: "https://www.google.com/maps/place/Hotel+Conde+Y+Olleros/@-34.5784565,-58.4503893,17z/data=!3m1!4b1!4m9!3m8!1s0x95bcb5e9c94af783:0xebc6e23a45b4d076!5m2!4m1!1i2!8m2!3d-34.5784565!4d-58.4482006!16s%2Fg%2F1hc7zqh6p?entry=ttu",
         picture:
-            "https://media.gta-series.com/images/gta-5/missions/story/mr-philips-15.jpg",
-        stars: 5,
+            "https://turismo.buenosaires.gob.ar/sites/turismo/files/Lobby-sin-alfombra.gif",
+        stars: 4,
         parkingLot: false,
         availableRooms: [
             {
-                name: "Trev",
+                name: "Suite",
                 price: 10000,
                 availableTimes: [
                     new Date("2021-10-10T08:00:00"),
@@ -102,7 +102,7 @@ const hotels = [
                 id: 1,
             },
             {
-                name: "Kill",
+                name: "Palacio",
                 price: 20000,
                 availableTimes: [
                     new Date("2021-10-10T08:00:00"),
@@ -112,7 +112,7 @@ const hotels = [
                 id: 2,
             },
             {
-                name: "Me",
+                name: "Jacuzzi",
                 price: 30000,
                 availableTimes: [
                     new Date("2021-10-10T08:00:00"),
