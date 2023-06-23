@@ -10,11 +10,10 @@ const animation = {
     animate: { opacity: 1, x: 0 },
     exit: { opacity: 0, x: 100 },
 }
+const HomePage = ({setShowMap, currentHotelIndex, setCurrentHotelIndex }:
+    { currentHotelIndex: number, setCurrentHotelIndex: Function, setShowMap: Function }) => {
 
-
-const HomePage = ({ currentHotelIndex, setCurrentHotelIndex }:
-    { currentHotelIndex: number, setCurrentHotelIndex: Function }) => {
-
+    setShowMap(false)
     const [currentHotel, setCurrentHotel] = useState(hotels[currentHotelIndex])
 
     useEffect(() => {

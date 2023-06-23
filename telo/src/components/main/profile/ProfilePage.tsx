@@ -12,8 +12,10 @@ const animation = {
     exit: { opacity: 0, x: 100 },
 }
 
-const ProfilePage = () => {
 
+const ProfilePage = ({setShowMap}: {setShowMap: Function}) => {
+
+    setShowMap(false)
     const user = getSessionUser()
 
     useEffect(() => {
