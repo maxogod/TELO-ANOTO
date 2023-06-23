@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     font-family: "Montserrat Alternates", sans-serif;
+    scroll-behavior: smooth;
 }
 
 h1,
@@ -12,4 +17,62 @@ h3,
 h4,
 h5 {
     font-family: "Lato", sans-serif;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+    opacity: 0.5;
+}
+
+.rounded-4xl {
+    border-radius: 2.5rem;
+}
+
+.rounded-t-4xl {
+    border-top-left-radius: 2.5rem /* 24px */;
+    border-top-right-radius: 2.5rem /* 24px */;
+}
+
+.slide {
+    height: 100vh !important;
+}
+
+@keyframes pop-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-pop-in {
+    animation: pop-in 0.3s ease-out;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(-10deg);
+    }
+}
+
+.hover\:animate-wiggle:hover {
+    animation: wiggle 0.5s ease-in-out;
+}
+
+@media screen and (max-height: 565px) {
+    .card {
+        height: 50vh !important;
+    }
+    .card-info {
+        height: 11rem /* 176px */;
+        bottom: -7rem /* -112px */;
+    }
 }
